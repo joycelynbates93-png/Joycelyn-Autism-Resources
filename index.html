@@ -5,15 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Joycelyn Autism Resource Hub - Connecting families with trusted autism resources, support, education, healthcare, therapy, and Louisiana community services.">
-
 <title>Joycelyn Autism Resource Hub 🧩</title>
 
 <style>
 
-/* ==============================
-   GLOBAL STYLES
-============================== */
+/* =========================================
+   BASIC WEBSITE STYLES
+========================================= */
 
 * {
     box-sizing: border-box;
@@ -28,26 +26,24 @@ html {
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: #f7fbff;
-    color: #243447;
+    color: #263238;
     line-height: 1.6;
 }
 
-button,
-input,
-a {
+button {
     font-family: inherit;
 }
 
 
-/* ==============================
+/* =========================================
    HEADER
-============================== */
+========================================= */
 
 header {
     background: linear-gradient(135deg, #6c63ff, #4ecdc4);
     color: white;
-    padding: 24px 20px;
     text-align: center;
+    padding: 25px 15px;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -60,8 +56,8 @@ header {
 }
 
 .tagline {
-    margin-top: 5px;
     font-size: 1rem;
+    margin-top: 5px;
 }
 
 nav {
@@ -75,20 +71,19 @@ nav a {
     font-weight: bold;
 }
 
-nav a:hover,
-nav a:focus {
+nav a:hover {
     text-decoration: underline;
 }
 
 
-/* ==============================
-   HERO SECTION
-============================== */
+/* =========================================
+   HERO
+========================================= */
 
 .hero {
-    background: #eef7ff;
-    padding: 70px 20px;
     text-align: center;
+    padding: 70px 20px;
+    background: #eef7ff;
 }
 
 .hero h1 {
@@ -103,132 +98,230 @@ nav a:focus {
     font-size: 1.15rem;
 }
 
-.hero-message {
+.hero strong {
+    display: block;
     margin-top: 20px;
-    font-weight: bold;
     color: #4c45b8;
 }
 
 
-/* ==============================
+/* =========================================
    SEARCH
-============================== */
+========================================= */
 
-.search-container {
+.search-box {
     max-width: 650px;
     margin: 30px auto 0;
 }
 
-.search-container input {
+.search-box input {
     width: 100%;
     padding: 17px 22px;
-    border: 3px solid #6c63ff;
     border-radius: 35px;
+    border: 3px solid #6c63ff;
     font-size: 1rem;
     outline: none;
-    background: white;
 }
 
-.search-container input:focus {
+.search-box input:focus {
     box-shadow: 0 0 0 4px rgba(108,99,255,0.2);
 }
 
 
-/* ==============================
-   SECTIONS
-============================== */
+/* =========================================
+   RESOURCE MAP SECTION
+========================================= */
 
-section {
+.resource-map {
     max-width: 1200px;
     margin: auto;
     padding: 65px 20px;
 }
 
-.section-title {
+.resource-map h2 {
     text-align: center;
     color: #4c45b8;
-    font-size: 2rem;
-    margin-bottom: 12px;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
 }
 
-.section-description {
+.resource-intro {
     text-align: center;
     max-width: 750px;
-    margin: 0 auto 40px;
+    margin: 0 auto 50px;
 }
 
 
-/* ==============================
-   INTERACTIVE PUZZLE MAP
-============================== */
+/* =========================================
+   ACTUAL PUZZLE PIECES
+========================================= */
 
-.puzzle-grid {
+.puzzle-board {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
 }
+
+
+/*
+   Each puzzle piece is a real puzzle-shaped
+   CSS button using rounded tabs and notches.
+*/
 
 .puzzle-piece {
     position: relative;
-    min-height: 230px;
+    min-height: 190px;
     border: none;
-    border-radius: 25px;
-    padding: 30px 20px;
-    background: white;
-    color: #243447;
     cursor: pointer;
+    color: white;
+    padding: 35px 25px;
     text-align: center;
-    border: 4px solid #6c63ff;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    transition: all 0.25s ease;
-    overflow: hidden;
+    font-weight: bold;
+    isolation: isolate;
+
+    /* Puzzle-piece shape */
+    border-radius: 18px 18px 35px 18px;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+    box-shadow:
+        0 8px 15px rgba(0,0,0,0.15);
 }
+
+
+/* Puzzle tab on top */
+
+.puzzle-piece::before {
+    content: "";
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    background: inherit;
+    border-radius: 50%;
+    top: -27px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+}
+
+
+/* Puzzle tab on right */
 
 .puzzle-piece::after {
-    content: "🧩";
+    content: "";
     position: absolute;
-    right: -10px;
-    bottom: -20px;
-    font-size: 90px;
-    opacity: 0.08;
+    width: 55px;
+    height: 55px;
+    background: inherit;
+    border-radius: 50%;
+    right: -27px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: -1;
 }
 
-.puzzle-piece:hover,
-.puzzle-piece:focus {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-    outline: none;
+
+/* Hover */
+
+.puzzle-piece:hover {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow:
+        0 15px 30px rgba(0,0,0,0.22);
+    z-index: 10;
 }
 
+
+/* Keyboard focus */
+
 .puzzle-piece:focus {
-    box-shadow: 0 0 0 5px rgba(76,69,184,0.3);
+    outline: 5px solid rgba(76,69,184,0.35);
+    outline-offset: 4px;
 }
+
+
+/* Puzzle colors */
+
+.puzzle-purple {
+    background: #6c63ff;
+}
+
+.puzzle-blue {
+    background: #4a90e2;
+}
+
+.puzzle-teal {
+    background: #27ae9a;
+}
+
+.puzzle-pink {
+    background: #e76f9f;
+}
+
+.puzzle-orange {
+    background: #f28c28;
+}
+
+.puzzle-green {
+    background: #55a630;
+}
+
+.puzzle-coral {
+    background: #e76f51;
+}
+
+.puzzle-indigo {
+    background: #5b5fdb;
+}
+
+.puzzle-gold {
+    background: #c99a00;
+}
+
+.puzzle-sky {
+    background: #3a9bdc;
+}
+
+.puzzle-rose {
+    background: #c85583;
+}
+
+.puzzle-lavender {
+    background: #8067c7;
+}
+
+
+/* Puzzle content */
 
 .puzzle-icon {
-    font-size: 3.5rem;
+    font-size: 3rem;
+    display: block;
     margin-bottom: 10px;
 }
 
 .puzzle-piece h3 {
-    color: #4c45b8;
+    font-size: 1.15rem;
     margin-bottom: 8px;
-    font-size: 1.25rem;
 }
 
 .puzzle-piece p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
 
 
-/* ==============================
-   MODAL / POPUP
-============================== */
+/* =========================================
+   MODAL
+========================================= */
 
 .modal {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(24, 30, 55, 0.75);
+    background: rgba(20,25,50,0.78);
     z-index: 2000;
     padding: 20px;
     overflow-y: auto;
@@ -236,8 +329,8 @@ section {
 
 .modal.active {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 .modal-content {
@@ -246,67 +339,62 @@ section {
     max-width: 850px;
     max-height: 90vh;
     overflow-y: auto;
+    padding: 35px;
     border-radius: 25px;
-    padding: 30px;
     position: relative;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     animation: popup 0.25s ease;
 }
 
 @keyframes popup {
+
     from {
         opacity: 0;
-        transform: scale(0.92);
+        transform: scale(0.9);
     }
 
     to {
         opacity: 1;
         transform: scale(1);
     }
+
 }
 
 .close-button {
     position: absolute;
-    right: 18px;
     top: 15px;
-    border: none;
-    background: #f1f1f1;
+    right: 15px;
     width: 42px;
     height: 42px;
+    border: none;
     border-radius: 50%;
+    background: #eeeeee;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #333;
 }
 
-.close-button:hover,
-.close-button:focus {
+.close-button:hover {
     background: #6c63ff;
     color: white;
 }
 
-.modal-header {
+.modal h2 {
+    color: #4c45b8;
+    margin-bottom: 8px;
     padding-right: 50px;
+}
+
+.modal-description {
     margin-bottom: 25px;
 }
 
-.modal-header h2 {
-    color: #4c45b8;
-    font-size: 1.8rem;
-}
 
-.modal-header p {
-    margin-top: 5px;
-}
-
-
-/* ==============================
-   RESOURCE CARDS
-============================== */
+/* =========================================
+   RESOURCE CARDS INSIDE POPUPS
+========================================= */
 
 .resource-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 18px;
 }
 
@@ -315,12 +403,6 @@ section {
     border: 2px solid #dce7ff;
     border-radius: 16px;
     padding: 20px;
-    transition: 0.2s ease;
-}
-
-.resource-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 7px 18px rgba(0,0,0,0.08);
 }
 
 .resource-card h3 {
@@ -336,70 +418,41 @@ section {
     display: inline-block;
     margin-top: 15px;
     padding: 10px 16px;
-    border-radius: 22px;
     background: #6c63ff;
     color: white;
     text-decoration: none;
+    border-radius: 22px;
     font-weight: bold;
 }
 
-.resource-button:hover,
-.resource-button:focus {
+.resource-button:hover {
     background: #4c45b8;
 }
 
 
-/* ==============================
-   LOUISIANA SECTION
-============================== */
-
-.louisiana-section {
-    background: #fff5fb;
-    max-width: none;
-}
-
-.louisiana-inner {
-    max-width: 1200px;
-    margin: auto;
-}
-
-
-/* ==============================
+/* =========================================
    ABOUT
-============================== */
+========================================= */
 
-.about-box {
+.about {
+    max-width: 1000px;
+    margin: 30px auto 70px;
+    padding: 45px 25px;
     background: white;
     border-radius: 25px;
-    padding: 45px 25px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.07);
     text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-.about-box p {
-    max-width: 800px;
-    margin: auto;
-    font-size: 1.1rem;
-}
-
-
-/* ==============================
-   NOTICE
-============================== */
-
-.notice {
-    margin-top: 35px;
-    padding: 20px;
-    background: #fff8dc;
-    border: 2px solid #e8c65c;
-    border-radius: 15px;
-    text-align: center;
+.about h2 {
+    color: #4c45b8;
+    margin-bottom: 15px;
 }
 
 
-/* ==============================
+/* =========================================
    FOOTER
-============================== */
+========================================= */
 
 footer {
     background: #29245c;
@@ -408,22 +461,26 @@ footer {
     padding: 35px 20px;
 }
 
-footer p {
-    margin-bottom: 8px;
-}
-
 .back-top {
     display: inline-block;
-    margin-top: 15px;
     color: white;
+    margin-top: 15px;
     font-weight: bold;
     text-decoration: none;
 }
 
 
-/* ==============================
+/* =========================================
    MOBILE
-============================== */
+========================================= */
+
+@media (max-width: 900px) {
+
+    .puzzle-board {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
 
 @media (max-width: 600px) {
 
@@ -437,25 +494,23 @@ footer p {
         font-size: 0.9rem;
     }
 
-    .hero {
-        padding: 50px 15px;
-    }
-
     .hero h1 {
         font-size: 2rem;
     }
 
-    section {
-        padding: 50px 15px;
+    .puzzle-board {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .puzzle-piece {
+        min-height: 180px;
     }
 
     .modal-content {
         padding: 25px 18px;
     }
 
-    .modal-header h2 {
-        font-size: 1.5rem;
-    }
 }
 
 </style>
@@ -464,1106 +519,899 @@ footer p {
 
 <body id="top">
 
-<!-- ==============================
+<!-- =========================================
      HEADER
-============================== -->
+========================================= -->
 
 <header>
 
-```
 <div class="logo">
-    🧩 Joycelyn Autism Resource Hub
+🧩 Joycelyn Autism Resource Hub
 </div>
 
 <div class="tagline">
-    Connecting families with trusted autism resources and support.
+Connecting families with trusted autism resources and support.
 </div>
 
-<nav aria-label="Main navigation">
-    <a href="#home">Home</a>
-    <a href="#resource-map">Resource Map</a>
-    <a href="#louisiana">Louisiana</a>
-    <a href="#about">About</a>
+<nav>
+<a href="#home">Home</a>
+<a href="#resource-map">Resource Map</a>
+<a href="#about">About</a>
 </nav>
-```
 
 </header>
 
-<main>
-
-<!-- ==============================
+<!-- =========================================
      HERO
-============================== -->
+========================================= -->
 
 <section class="hero" id="home">
 
-```
 <h1>You're Not Alone 💙</h1>
 
 <p>
-    Welcome to Joycelyn Autism Resource Hub.
-    Click a puzzle piece below to explore helpful resources
-    for autistic individuals, children, caregivers, and families.
+Welcome to Joycelyn Autism Resource Hub — a welcoming place
+for families, caregivers, and autistic individuals to find
+helpful resources, support, education, and community connections.
 </p>
 
-<p class="hero-message">
-    🧩 Click a puzzle piece to open a resource directory!
-</p>
+<strong>
+🧩 Click an actual puzzle piece below to explore resources!
+</strong>
 
-<div class="search-container">
+<div class="search-box">
 
-    <input
-        type="search"
-        id="resourceSearch"
-        placeholder="🔎 Search for autism resources..."
-        aria-label="Search autism resources"
-        onkeyup="searchResources()"
-    >
+<input
+type="search"
+id="resourceSearch"
+placeholder="🔎 Search the puzzle pieces..."
+aria-label="Search resource categories"
+onkeyup="searchPuzzles()"
+
+>
 
 </div>
-```
 
 </section>
 
-<!-- ==============================
-     INTERACTIVE RESOURCE MAP
-============================== -->
+<!-- =========================================
+     PUZZLE RESOURCE MAP
+========================================= -->
 
-<section id="resource-map">
+<section class="resource-map" id="resource-map">
 
-```
-<h2 class="section-title">
-    🧩 Interactive Autism Resource Map
-</h2>
+<h2>🧩 Interactive Resource Map</h2>
 
-<p class="section-description">
-    Choose a category below to explore resources.
-    Each puzzle piece opens a collection of helpful websites
-    and organizations without taking you away from Joycelyn Autism Resource Hub.
+<p class="resource-intro">
+Each puzzle piece represents an important area of support.
+Click a piece to open a resource directory. Individual
+resources will open in a new browser tab.
 </p>
 
+<div class="puzzle-board">
 
-<div class="puzzle-grid">
+<!-- 1 -->
 
+<button
+class="puzzle-piece puzzle-purple"
+data-search="early intervention baby children developmental"
+onclick="openModal('earlyIntervention')"
 
-    <!-- EARLY INTERVENTION -->
+>
 
-    <button
-        class="puzzle-piece"
-        onclick="openModal('earlyIntervention')"
-        aria-label="Open Early Intervention resources"
-    >
+<span class="puzzle-icon">👶</span>
 
-        <div class="puzzle-icon">👶</div>
+<h3>Early Intervention</h3>
 
-        <h3>Early Intervention</h3>
+<p>
+Early developmental support and services.
+</p>
 
-        <p>
-            Resources for early developmental support,
-            screenings, and services for young children.
-        </p>
+</button>
 
-    </button>
+<!-- 2 -->
 
+<button
+class="puzzle-piece puzzle-blue"
+data-search="healthcare insurance medicaid doctors medical"
+onclick="openModal('healthcare')"
 
-    <!-- HEALTHCARE -->
+>
 
-    <button
-        class="puzzle-piece"
-        onclick="openModal('healthcare')"
-        aria-label="Open Healthcare and Insurance resources"
-    >
+<span class="puzzle-icon">🏥</span>
 
-        <div class="puzzle-icon">🏥</div>
+<h3>Healthcare & Insurance</h3>
 
-        <h3>Healthcare & Insurance</h3>
+<p>
+Healthcare coverage and insurance resources.
+</p>
 
-        <p>
-            Healthcare information, Medicaid,
-            insurance, and autism-related services.
-        </p>
+</button>
 
-    </button>
+<!-- 3 -->
 
+<button
+class="puzzle-piece puzzle-teal"
+data-search="education school iep special education"
+onclick="openModal('education')"
 
-    <!-- EDUCATION -->
+>
 
-    <button
-        class="puzzle-piece"
-        onclick="openModal('education')"
-        aria-label="Open Education and IEP resources"
-    >
+<span class="puzzle-icon">🎓</span>
 
-        <div class="puzzle-icon">🎓</div>
+<h3>Education & IEP</h3>
 
-        <h3>Education & IEP</h3>
+<p>
+School support and special education resources.
+</p>
 
-        <p>
-            School support, IEP information,
-            special education, and advocacy.
-        </p>
+</button>
 
-    </button>
+<!-- 4 -->
 
+<button
+class="puzzle-piece puzzle-pink"
+data-search="therapy aba speech occupational services"
+onclick="openModal('therapy')"
 
-    <!-- THERAPY -->
+>
 
-    <button
-        class="puzzle-piece"
-        onclick="openModal('therapy')"
-        aria-label="Open Therapy and Services resources"
-    >
+<span class="puzzle-icon">🧠</span>
 
-        <div class="puzzle-icon">🧠</div>
+<h3>Therapy & Services</h3>
 
-        <h3>Therapy & Services</h3>
+<p>
+Therapy and developmental services.
+</p>
 
-        <p>
-            Explore ABA, speech, occupational,
-            physical, and developmental therapy.
-        </p>
+</button>
 
-    </button>
+<!-- 5 -->
 
+<button
+class="puzzle-piece puzzle-orange"
+data-search="financial money assistance ssi benefits"
+onclick="openModal('financial')"
 
-    <!-- FINANCIAL -->
+>
 
-    <button
-        class="puzzle-piece"
-        onclick="openModal('financial')"
-        aria-label="Open Financial Assistance resources"
-    >
+<span class="puzzle-icon">💰</span>
 
-        <div class="puzzle-icon">💰</div>
+<h3>Financial Assistance</h3>
 
-        <h3>Financial Assistance</h3>
+<p>
+Benefits, SSI, Medicaid, and financial support.
+</p>
 
-        <p>
-            Find information about SSI, benefits,
-            Medicaid, waivers, and financial help.
-        </p>
+</button>
 
-    </button>
+<!-- 6 -->
 
+<button
+class="puzzle-piece puzzle-green"
+data-search="family support groups parents community"
+onclick="openModal('support')"
 
-    <!-- SUPPORT -->
+>
 
-    <button
-        class="puzzle-piece"
-        onclick="openModal('support')"
-        aria-label="Open Family and Support resources"
-    >
+<span class="puzzle-icon">💙</span>
 
-        <div class="puzzle-icon">💙</div>
+<h3>Family & Support</h3>
 
-        <h3>Family & Support Groups</h3>
+<p>
+Parent support and autism communities.
+</p>
 
-        <p>
-            Connect with autism organizations,
-            parent support, and community resources.
-        </p>
+</button>
 
-    </button>
+<!-- 7 -->
 
+<button
+class="puzzle-piece puzzle-coral"
+data-search="safety wandering emergency"
+onclick="openModal('safety')"
 
-    <!-- SAFETY -->
+>
 
-    <button
-        class="puzzle-piece"
-        onclick="openModal('safety')"
-        aria-label="Open Safety resources"
-    >
+<span class="puzzle-icon">🛡️</span>
 
-        <div class="puzzle-icon">🛡️</div>
+<h3>Safety Resources</h3>
 
-        <h3>Safety Resources</h3>
+<p>
+Safety planning and emergency resources.
+</p>
 
-        <p>
-            Safety planning, wandering prevention,
-            emergency preparation, and support.
-        </p>
+</button>
 
-    </button>
+<!-- 8 -->
 
+<button
+class="puzzle-piece puzzle-indigo"
+data-search="activities recreation sensory events"
+onclick="openModal('activities')"
 
-    <!-- ACTIVITIES -->
+>
 
-    <button
-        class="puzzle-piece"
-        onclick="openModal('activities')"
-        aria-label="Open Activities and Recreation resources"
-    >
+<span class="puzzle-icon">🎨</span>
 
-        <div class="puzzle-icon">🎨</div>
+<h3>Activities & Recreation</h3>
 
-        <h3>Activities & Recreation</h3>
+<p>
+Sensory-friendly activities and recreation.
+</p>
 
-        <p>
-            Find sensory-friendly activities,
-            recreation, events, and community fun.
-        </p>
+</button>
 
-    </button>
+<!-- 9 -->
 
+<button
+class="puzzle-piece puzzle-gold"
+data-search="louisiana louisiana resources state"
+onclick="openModal('louisiana')"
 
-    <!-- LOUISIANA -->
+>
 
-    <button
-        class="puzzle-piece"
-        onclick="openModal('louisianaResources')"
-        aria-label="Open Louisiana Resources"
-    >
+<span class="puzzle-icon">📍</span>
 
-        <div class="puzzle-icon">📍</div>
+<h3>Louisiana Resources</h3>
 
-        <h3>Louisiana Resources</h3>
+<p>
+Resources specifically for Louisiana families.
+</p>
 
-        <p>
-            Explore Louisiana-specific healthcare,
-            education, disability, and community resources.
-        </p>
+</button>
 
-    </button>
+<!-- 10 -->
 
+<button
+class="puzzle-piece puzzle-sky"
+data-search="advocacy disability rights"
+onclick="openModal('advocacy')"
 
-    <!-- ADVOCACY -->
+>
 
-    <button
-        class="puzzle-piece"
-        onclick="openModal('advocacy')"
-        aria-label="Open Advocacy resources"
-    >
+<span class="puzzle-icon">📣</span>
 
-        <div class="puzzle-icon">📣</div>
+<h3>Advocacy</h3>
 
-        <h3>Advocacy</h3>
+<p>
+Disability rights and advocacy information.
+</p>
 
-        <p>
-            Learn about autism advocacy,
-            disability rights, and self-advocacy.
-        </p>
+</button>
 
-    </button>
+<!-- 11 -->
 
+<button
+class="puzzle-piece puzzle-rose"
+data-search="employment jobs adults work vocational"
+onclick="openModal('employment')"
 
-    <!-- EMPLOYMENT -->
+>
 
-    <button
-        class="puzzle-piece"
-        onclick="openModal('employment')"
-        aria-label="Open Employment resources"
-    >
+<span class="puzzle-icon">💼</span>
 
-        <div class="puzzle-icon">💼</div>
+<h3>Employment & Adult Services</h3>
 
-        <h3>Employment & Adult Services</h3>
+<p>
+Employment and independent living resources.
+</p>
 
-        <p>
-            Resources for autistic adults,
-            job training, employment, and independence.
-        </p>
+</button>
 
-    </button>
+<!-- 12 -->
 
+<button
+class="puzzle-piece puzzle-lavender"
+data-search="community food housing transportation help"
+onclick="openModal('community')"
 
-    <!-- COMMUNITY -->
+>
 
-    <button
-        class="puzzle-piece"
-        onclick="openModal('community')"
-        aria-label="Open Community Resources"
-    >
+<span class="puzzle-icon">🤝</span>
 
-        <div class="puzzle-icon">🤝</div>
+<h3>Community Resources</h3>
 
-        <h3>Community Resources</h3>
+<p>
+Food, housing, transportation, and assistance.
+</p>
 
-        <p>
-            Find food, transportation, housing,
-            family assistance, and local support.
-        </p>
-
-    </button>
-
+</button>
 
 </div>
-```
 
 </section>
 
-<!-- ==============================
-     LOUISIANA FEATURE
-============================== -->
-
-<section class="louisiana-section" id="louisiana">
-
-```
-<div class="louisiana-inner">
-
-    <h2 class="section-title">
-        💙 Louisiana Families
-    </h2>
-
-    <p class="section-description">
-        Looking for help in Louisiana?
-        Click the Louisiana Resources puzzle piece above
-        to explore state and community resources.
-    </p>
-
-    <div class="notice">
-
-        <strong>📍 Resource Reminder:</strong>
-
-        Resource availability and eligibility can change.
-        Always contact the organization directly to confirm
-        current services, eligibility, and application requirements.
-
-    </div>
-
-</div>
-```
-
-</section>
-
-<!-- ==============================
+<!-- =========================================
      ABOUT
-============================== -->
+========================================= -->
 
-<section id="about">
+<section class="about" id="about">
 
-```
-<div class="about-box">
+<h2>💙 About Joycelyn Autism Resource Hub</h2>
 
-    <h2 class="section-title">
-        💙 About Joycelyn Autism Resource Hub
-    </h2>
+<p>
+Joycelyn Autism Resource Hub was created to help families,
+caregivers, and autistic individuals find important resources
+in one easy-to-use place.
+</p>
 
-    <p>
-        Joycelyn Autism Resource Hub was created to make finding
-        autism resources easier for families, caregivers, and
-        autistic individuals. Our goal is to bring trusted
-        information together in one simple, welcoming place.
-    </p>
+<br>
 
-    <br>
-
-    <p>
-        We believe every family deserves access to information,
-        support, education, and community connections.
-    </p>
-
-</div>
-```
+<p>
+Our goal is to connect families with trusted information,
+support services, education, healthcare, and community resources.
+</p>
 
 </section>
 
-</main>
+<!-- =========================================
+     EARLY INTERVENTION MODAL
+========================================= -->
 
-<!-- =========================================================
-     MODAL: EARLY INTERVENTION
-========================================================= -->
-
-<div class="modal" id="earlyIntervention" role="dialog" aria-modal="true" aria-labelledby="earlyTitle">
+<div class="modal" id="earlyIntervention">
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('earlyIntervention')" aria-label="Close">
+<button class="close-button" onclick="closeModal('earlyIntervention')">
 ×
 </button>
 
-<div class="modal-header">
+<h2>👶 Early Intervention Resources</h2>
 
-<h2 id="earlyTitle">👶 Early Intervention Resources</h2>
-
-<p>
-Resources that can help families learn about early developmental support and intervention.
+<p class="modal-description">
+Resources for young children and families seeking developmental support.
 </p>
-
-</div>
 
 <div class="resource-list">
 
 <div class="resource-card">
 <h3>Louisiana EarlySteps</h3>
 <p>Louisiana's early intervention program for eligible infants and toddlers.</p>
-<a class="resource-button" href="https://ldh.la.gov/page/earlysteps" target="_blank" rel="noopener">Visit EarlySteps</a>
+<a class="resource-button" href="https://ldh.la.gov/page/earlysteps" target="_blank">Visit EarlySteps</a>
 </div>
 
 <div class="resource-card">
-<h3>CDC Learn the Signs. Act Early.</h3>
-<p>Learn about developmental milestones and when to act if you have concerns.</p>
-<a class="resource-button" href="https://www.cdc.gov/ncbddd/actearly/" target="_blank" rel="noopener">Visit CDC</a>
+<h3>CDC Act Early</h3>
+<p>Learn about developmental milestones and early concerns.</p>
+<a class="resource-button" href="https://www.cdc.gov/ncbddd/actearly/" target="_blank">Visit CDC</a>
 </div>
 
 <div class="resource-card">
 <h3>Help Me Grow</h3>
-<p>Connect families with developmental information and community resources.</p>
-<a class="resource-button" href="https://helpmegrownational.org/" target="_blank" rel="noopener">Visit Website</a>
-</div>
-
-<div class="resource-card">
-<h3>Child Find</h3>
-<p>Learn about locating and evaluating children who may need special education services.</p>
-<a class="resource-button" href="https://www.louisianabelieves.com/" target="_blank" rel="noopener">Visit Louisiana Believes</a>
+<p>Find developmental information and community resources.</p>
+<a class="resource-button" href="https://helpmegrownational.org/" target="_blank">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>Autism Speaks</h3>
-<p>Explore information and resources for families navigating autism.</p>
-<a class="resource-button" href="https://www.autismspeaks.org/" target="_blank" rel="noopener">Visit Website</a>
+<p>Autism information and resources for families.</p>
+<a class="resource-button" href="https://www.autismspeaks.org/" target="_blank">Visit Website</a>
 </div>
 
 </div>
-
+</div>
 </div>
 
-</div>
+<!-- =========================================
+     HEALTHCARE MODAL
+========================================= -->
 
-<!-- =========================================================
-     MODAL: HEALTHCARE
-========================================================= -->
-
-<div class="modal" id="healthcare" role="dialog" aria-modal="true">
+<div class="modal" id="healthcare">
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('healthcare')" aria-label="Close">
+<button class="close-button" onclick="closeModal('healthcare')">
 ×
 </button>
 
-<div class="modal-header">
+<h2>🏥 Healthcare & Insurance</h2>
 
-<h2>🏥 Healthcare & Insurance Resources</h2>
-
-<p>
-Find healthcare, insurance, Medicaid, and autism service information.
+<p class="modal-description">
+Healthcare and insurance resources for autism and developmental services.
 </p>
-
-</div>
 
 <div class="resource-list">
 
 <div class="resource-card">
 <h3>Louisiana Medicaid</h3>
-<p>Learn about Medicaid healthcare coverage and programs.</p>
-<a class="resource-button" href="https://ldh.la.gov/medicaid" target="_blank" rel="noopener">Visit Medicaid</a>
+<p>Learn about Medicaid coverage and healthcare programs.</p>
+<a class="resource-button" href="https://ldh.la.gov/medicaid" target="_blank">Visit Medicaid</a>
 </div>
 
 <div class="resource-card">
 <h3>Healthy Louisiana</h3>
 <p>Information about Louisiana Medicaid health plans.</p>
-<a class="resource-button" href="https://www.healthy.la.gov/" target="_blank" rel="noopener">Visit Website</a>
+<a class="resource-button" href="https://www.healthy.la.gov/" target="_blank">Visit Website</a>
 </div>
 
 <div class="resource-card">
-<h3>CDC Autism Information</h3>
+<h3>CDC Autism</h3>
 <p>Trusted information about autism and developmental health.</p>
-<a class="resource-button" href="https://www.cdc.gov/autism/" target="_blank" rel="noopener">Visit CDC</a>
-</div>
-
-<div class="resource-card">
-<h3>Autism Speaks</h3>
-<p>Healthcare and autism information for families.</p>
-<a class="resource-button" href="https://www.autismspeaks.org/" target="_blank" rel="noopener">Visit Website</a>
+<a class="resource-button" href="https://www.cdc.gov/autism/" target="_blank">Visit CDC</a>
 </div>
 
 <div class="resource-card">
 <h3>Autism Society</h3>
 <p>Information and connections for autistic individuals and families.</p>
-<a class="resource-button" href="https://autismsociety.org/" target="_blank" rel="noopener">Visit Website</a>
+<a class="resource-button" href="https://autismsociety.org/" target="_blank">Visit Website</a>
 </div>
 
 </div>
-
+</div>
 </div>
 
-</div>
+<!-- =========================================
+     EDUCATION MODAL
+========================================= -->
 
-<!-- =========================================================
-     MODAL: EDUCATION
-========================================================= -->
-
-<div class="modal" id="education" role="dialog" aria-modal="true">
+<div class="modal" id="education">
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('education')" aria-label="Close">
+<button class="close-button" onclick="closeModal('education')">
 ×
 </button>
 
-<div class="modal-header">
-
 <h2>🎓 Education & IEP Resources</h2>
 
-<p>
-School support, special education, IEPs, and advocacy resources.
+<p class="modal-description">
+Resources for school, IEPs, special education, and educational advocacy.
 </p>
-
-</div>
 
 <div class="resource-list">
 
 <div class="resource-card">
 <h3>Louisiana Department of Education</h3>
-<p>Explore Louisiana education information and special education resources.</p>
-<a class="resource-button" href="https://doe.louisiana.gov/" target="_blank" rel="noopener">Visit Website</a>
+<p>Louisiana education and special education information.</p>
+<a class="resource-button" href="https://doe.louisiana.gov/" target="_blank">Visit LDOE</a>
 </div>
 
 <div class="resource-card">
 <h3>Louisiana Believes</h3>
-<p>Information about Louisiana schools and educational programs.</p>
-<a class="resource-button" href="https://www.louisianabelieves.com/" target="_blank" rel="noopener">Visit Website</a>
+<p>Information about Louisiana schools and education.</p>
+<a class="resource-button" href="https://www.louisianabelieves.com/" target="_blank">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>Wrightslaw</h3>
 <p>Special education law and advocacy information.</p>
-<a class="resource-button" href="https://www.wrightslaw.com/" target="_blank" rel="noopener">Visit Wrightslaw</a>
+<a class="resource-button" href="https://www.wrightslaw.com/" target="_blank">Visit Wrightslaw</a>
 </div>
 
 <div class="resource-card">
-<h3>Understood</h3>
-<p>Learning and school resources for children with learning and attention differences.</p>
-<a class="resource-button" href="https://www.understood.org/" target="_blank" rel="noopener">Visit Website</a>
-</div>
-
-<div class="resource-card">
-<h3>Parent Training and Information Centers</h3>
-<p>Find parent training and special education advocacy assistance.</p>
-<a class="resource-button" href="https://www.parentcenterhub.org/" target="_blank" rel="noopener">Visit Website</a>
+<h3>Parent Center Hub</h3>
+<p>Parent training and special education resources.</p>
+<a class="resource-button" href="https://www.parentcenterhub.org/" target="_blank">Visit Website</a>
 </div>
 
 </div>
-
+</div>
 </div>
 
-</div>
+<!-- =========================================
+     THERAPY MODAL
+========================================= -->
 
-<!-- =========================================================
-     MODAL: THERAPY
-========================================================= -->
-
-<div class="modal" id="therapy" role="dialog" aria-modal="true">
+<div class="modal" id="therapy">
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('therapy')" aria-label="Close">
+<button class="close-button" onclick="closeModal('therapy')">
 ×
 </button>
 
-<div class="modal-header">
-
 <h2>🧠 Therapy & Services</h2>
 
-<p>
-Explore information about therapies and developmental services.
+<p class="modal-description">
+Explore information about therapy and developmental services.
 </p>
-
-</div>
 
 <div class="resource-list">
 
 <div class="resource-card">
 <h3>Autism Speaks</h3>
-<p>Explore information about autism therapies and services.</p>
-<a class="resource-button" href="https://www.autismspeaks.org/" target="_blank" rel="noopener">Visit Website</a>
-</div>
-
-<div class="resource-card">
-<h3>Autism Society</h3>
-<p>Find information and connections to autism services.</p>
-<a class="resource-button" href="https://autismsociety.org/" target="_blank" rel="noopener">Visit Website</a>
-</div>
-
-<div class="resource-card">
-<h3>CDC Autism Resources</h3>
-<p>Learn about developmental health and autism.</p>
-<a class="resource-button" href="https://www.cdc.gov/autism/" target="_blank" rel="noopener">Visit CDC</a>
+<p>Information about autism services and therapies.</p>
+<a class="resource-button" href="https://www.autismspeaks.org/" target="_blank">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>ASHA</h3>
-<p>Information about speech, language, and communication services.</p>
-<a class="resource-button" href="https://www.asha.org/" target="_blank" rel="noopener">Visit ASHA</a>
+<p>Speech and communication resources.</p>
+<a class="resource-button" href="https://www.asha.org/" target="_blank">Visit ASHA</a>
 </div>
 
 <div class="resource-card">
 <h3>AOTA</h3>
-<p>Learn about occupational therapy and services.</p>
-<a class="resource-button" href="https://www.aota.org/" target="_blank" rel="noopener">Visit AOTA</a>
+<p>Occupational therapy information and resources.</p>
+<a class="resource-button" href="https://www.aota.org/" target="_blank">Visit AOTA</a>
+</div>
+
+<div class="resource-card">
+<h3>Autism Society</h3>
+<p>Autism service and community information.</p>
+<a class="resource-button" href="https://autismsociety.org/" target="_blank">Visit Website</a>
 </div>
 
 </div>
-
+</div>
 </div>
 
-</div>
+<!-- =========================================
+     FINANCIAL MODAL
+========================================= -->
 
-<!-- =========================================================
-     MODAL: FINANCIAL
-========================================================= -->
-
-<div class="modal" id="financial" role="dialog" aria-modal="true">
+<div class="modal" id="financial">
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('financial')" aria-label="Close">
+<button class="close-button" onclick="closeModal('financial')">
 ×
 </button>
 
-<div class="modal-header">
+<h2>💰 Financial Assistance</h2>
 
-<h2>💰 Financial Assistance Resources</h2>
-
-<p>
-Explore benefits, disability assistance, Medicaid, and financial support.
+<p class="modal-description">
+Resources for SSI, disability benefits, Medicaid, and community assistance.
 </p>
-
-</div>
 
 <div class="resource-list">
 
 <div class="resource-card">
 <h3>Social Security SSI</h3>
-<p>Learn about Supplemental Security Income and eligibility.</p>
-<a class="resource-button" href="https://www.ssa.gov/ssi/" target="_blank" rel="noopener">Visit SSA</a>
+<p>Learn about Supplemental Security Income.</p>
+<a class="resource-button" href="https://www.ssa.gov/ssi/" target="_blank">Visit SSA</a>
 </div>
 
 <div class="resource-card">
-<h3>Louisiana Medicaid</h3>
-<p>Healthcare coverage and Medicaid programs.</p>
-<a class="resource-button" href="https://ldh.la.gov/medicaid" target="_blank" rel="noopener">Visit Medicaid</a>
-</div>
-
-<div class="resource-card">
-<h3>Disability Benefits</h3>
-<p>Explore Social Security disability programs and information.</p>
-<a class="resource-button" href="https://www.ssa.gov/disability/" target="_blank" rel="noopener">Visit SSA</a>
+<h3>Social Security Disability</h3>
+<p>Information about disability programs.</p>
+<a class="resource-button" href="https://www.ssa.gov/disability/" target="_blank">Visit SSA</a>
 </div>
 
 <div class="resource-card">
 <h3>Benefits.gov</h3>
-<p>Explore government benefit programs and eligibility information.</p>
-<a class="resource-button" href="https://www.benefits.gov/" target="_blank" rel="noopener">Visit Benefits.gov</a>
+<p>Explore government benefit programs.</p>
+<a class="resource-button" href="https://www.benefits.gov/" target="_blank">Visit Benefits.gov</a>
 </div>
 
 <div class="resource-card">
 <h3>Louisiana 211</h3>
-<p>Find local assistance programs and community services.</p>
-<a class="resource-button" href="https://www.louisiana211.org/" target="_blank" rel="noopener">Visit 211</a>
+<p>Find local assistance programs and services.</p>
+<a class="resource-button" href="https://www.louisiana211.org/" target="_blank">Visit 211</a>
 </div>
 
 </div>
-
+</div>
 </div>
 
-</div>
+<!-- =========================================
+     SUPPORT MODAL
+========================================= -->
 
-<!-- =========================================================
-     MODAL: SUPPORT
-========================================================= -->
-
-<div class="modal" id="support" role="dialog" aria-modal="true">
+<div class="modal" id="support">
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('support')" aria-label="Close">
+<button class="close-button" onclick="closeModal('support')">
 ×
 </button>
 
-<div class="modal-header">
-
 <h2>💙 Family & Support Groups</h2>
 
-<p>
-Connect with autism organizations, families, caregivers, and support networks.
+<p class="modal-description">
+Connect with autism organizations and family support resources.
 </p>
-
-</div>
 
 <div class="resource-list">
 
 <div class="resource-card">
 <h3>Autism Society</h3>
-<p>Connect with autism support and community resources.</p>
-<a class="resource-button" href="https://autismsociety.org/" target="_blank" rel="noopener">Visit Website</a>
+<p>Autism support and community connections.</p>
+<a class="resource-button" href="https://autismsociety.org/" target="_blank">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>Autism Speaks</h3>
-<p>Family resources, information, and support.</p>
-<a class="resource-button" href="https://www.autismspeaks.org/" target="_blank" rel="noopener">Visit Website</a>
+<p>Family resources and autism information.</p>
+<a class="resource-button" href="https://www.autismspeaks.org/" target="_blank">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>Autistic Self Advocacy Network</h3>
 <p>Advocacy resources led by and for autistic people.</p>
-<a class="resource-button" href="https://autisticadvocacy.org/" target="_blank" rel="noopener">Visit ASAN</a>
+<a class="resource-button" href="https://autisticadvocacy.org/" target="_blank">Visit ASAN</a>
 </div>
 
 <div class="resource-card">
 <h3>National Autism Association</h3>
-<p>Autism safety and family resources.</p>
-<a class="resource-button" href="https://nationalautismassociation.org/" target="_blank" rel="noopener">Visit Website</a>
-</div>
-
-<div class="resource-card">
-<h3>Louisiana 211</h3>
-<p>Find community assistance and local support.</p>
-<a class="resource-button" href="https://www.louisiana211.org/" target="_blank" rel="noopener">Visit 211</a>
+<p>Safety and family resources.</p>
+<a class="resource-button" href="https://nationalautismassociation.org/" target="_blank">Visit Website</a>
 </div>
 
 </div>
-
+</div>
 </div>
 
-</div>
+<!-- =========================================
+     SAFETY MODAL
+========================================= -->
 
-<!-- =========================================================
-     MODAL: SAFETY
-========================================================= -->
-
-<div class="modal" id="safety" role="dialog" aria-modal="true">
+<div class="modal" id="safety">
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('safety')" aria-label="Close">
+<button class="close-button" onclick="closeModal('safety')">
 ×
 </button>
 
-<div class="modal-header">
-
 <h2>🛡️ Safety Resources</h2>
 
-<p>
-Safety planning and resources for autistic children and adults.
+<p class="modal-description">
+Resources for safety planning and emergency preparedness.
 </p>
-
-</div>
 
 <div class="resource-list">
 
 <div class="resource-card">
 <h3>National Autism Association</h3>
-<p>Safety information and resources for families.</p>
-<a class="resource-button" href="https://nationalautismassociation.org/" target="_blank" rel="noopener">Visit Website</a>
+<p>Autism safety resources for families.</p>
+<a class="resource-button" href="https://nationalautismassociation.org/" target="_blank">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>Project Lifesaver</h3>
-<p>Learn about programs designed to assist with locating individuals who wander.</p>
-<a class="resource-button" href="https://projectlifesaver.org/" target="_blank" rel="noopener">Visit Website</a>
+<p>Resources related to locating individuals who may wander.</p>
+<a class="resource-button" href="https://projectlifesaver.org/" target="_blank">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>911.gov</h3>
-<p>Emergency preparedness and emergency response information.</p>
-<a class="resource-button" href="https://www.911.gov/" target="_blank" rel="noopener">Visit 911.gov</a>
-</div>
-
-<div class="resource-card">
-<h3>Autism Speaks Safety</h3>
-<p>Explore autism safety resources and information.</p>
-<a class="resource-button" href="https://www.autismspeaks.org/" target="_blank" rel="noopener">Visit Website</a>
+<p>Emergency preparedness and response information.</p>
+<a class="resource-button" href="https://www.911.gov/" target="_blank">Visit 911.gov</a>
 </div>
 
 </div>
-
+</div>
 </div>
 
-</div>
+<!-- =========================================
+     ACTIVITIES MODAL
+========================================= -->
 
-<!-- =========================================================
-     MODAL: ACTIVITIES
-========================================================= -->
-
-<div class="modal" id="activities" role="dialog" aria-modal="true">
+<div class="modal" id="activities">
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('activities')" aria-label="Close">
+<button class="close-button" onclick="closeModal('activities')">
 ×
 </button>
 
-<div class="modal-header">
-
 <h2>🎨 Activities & Recreation</h2>
 
-<p>
-Explore recreation, sensory-friendly activities, and community events.
+<p class="modal-description">
+Explore recreation and inclusive activities.
 </p>
-
-</div>
 
 <div class="resource-list">
 
 <div class="resource-card">
-<h3>Sensory-Friendly Events</h3>
-<p>Look for sensory-friendly community events and activities.</p>
-<a class="resource-button" href="https://www.autismspeaks.org/" target="_blank" rel="noopener">Explore Resources</a>
-</div>
-
-<div class="resource-card">
-<h3>Autism Society</h3>
-<p>Find autism community connections and activities.</p>
-<a class="resource-button" href="https://autismsociety.org/" target="_blank" rel="noopener">Visit Website</a>
-</div>
-
-<div class="resource-card">
 <h3>Special Olympics</h3>
-<p>Explore inclusive sports and athletic opportunities.</p>
-<a class="resource-button" href="https://www.specialolympics.org/" target="_blank" rel="noopener">Visit Website</a>
+<p>Inclusive sports and athletic opportunities.</p>
+<a class="resource-button" href="https://www.specialolympics.org/" target="_blank">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>YMCA</h3>
 <p>Find local recreation and community programs.</p>
-<a class="resource-button" href="https://www.ymca.org/" target="_blank" rel="noopener">Visit YMCA</a>
+<a class="resource-button" href="https://www.ymca.org/" target="_blank">Visit YMCA</a>
+</div>
+
+<div class="resource-card">
+<h3>Autism Society</h3>
+<p>Community and activity resources.</p>
+<a class="resource-button" href="https://autismsociety.org/" target="_blank">Visit Website</a>
 </div>
 
 </div>
-
+</div>
 </div>
 
-</div>
+<!-- =========================================
+     LOUISIANA MODAL
+========================================= -->
 
-<!-- =========================================================
-     MODAL: LOUISIANA
-========================================================= -->
-
-<div class="modal" id="louisianaResources" role="dialog" aria-modal="true">
+<div class="modal" id="louisiana">
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('louisianaResources')" aria-label="Close">
+<button class="close-button" onclick="closeModal('louisiana')">
 ×
 </button>
 
-<div class="modal-header">
+<h2>📍 Louisiana Resources</h2>
 
-<h2>📍 Louisiana Autism & Family Resources</h2>
-
-<p>
-Important state and community resources for Louisiana families.
+<p class="modal-description">
+Important resources for families living in Louisiana.
 </p>
-
-</div>
 
 <div class="resource-list">
 
 <div class="resource-card">
 <h3>Louisiana Department of Health</h3>
-<p>Healthcare, public health, and developmental service information.</p>
-<a class="resource-button" href="https://ldh.la.gov/" target="_blank" rel="noopener">Visit LDH</a>
+<p>Healthcare and public health services.</p>
+<a class="resource-button" href="https://ldh.la.gov/" target="_blank">Visit LDH</a>
 </div>
 
 <div class="resource-card">
 <h3>Louisiana Medicaid</h3>
-<p>Medicaid programs and healthcare coverage.</p>
-<a class="resource-button" href="https://ldh.la.gov/medicaid" target="_blank" rel="noopener">Visit Medicaid</a>
+<p>Medicaid healthcare programs.</p>
+<a class="resource-button" href="https://ldh.la.gov/medicaid" target="_blank">Visit Medicaid</a>
 </div>
 
 <div class="resource-card">
 <h3>Louisiana EarlySteps</h3>
 <p>Early intervention services for eligible young children.</p>
-<a class="resource-button" href="https://ldh.la.gov/page/earlysteps" target="_blank" rel="noopener">Visit EarlySteps</a>
+<a class="resource-button" href="https://ldh.la.gov/page/earlysteps" target="_blank">Visit EarlySteps</a>
 </div>
 
 <div class="resource-card">
 <h3>Louisiana Department of Education</h3>
 <p>Education and special education information.</p>
-<a class="resource-button" href="https://doe.louisiana.gov/" target="_blank" rel="noopener">Visit LDOE</a>
+<a class="resource-button" href="https://doe.louisiana.gov/" target="_blank">Visit LDOE</a>
 </div>
 
 <div class="resource-card">
 <h3>Louisiana 211</h3>
-<p>Connect with food, housing, transportation, healthcare, and community resources.</p>
-<a class="resource-button" href="https://www.louisiana211.org/" target="_blank" rel="noopener">Visit 211</a>
+<p>Find food, housing, transportation, healthcare, and other resources.</p>
+<a class="resource-button" href="https://www.louisiana211.org/" target="_blank">Visit 211</a>
 </div>
 
 <div class="resource-card">
-<h3>Louisiana Workforce Commission</h3>
-<p>Employment and workforce resources.</p>
-<a class="resource-button" href="https://www.laworks.net/" target="_blank" rel="noopener">Visit LWC</a>
+<h3>Disability Rights Louisiana</h3>
+<p>Disability rights and advocacy resources.</p>
+<a class="resource-button" href="https://disabilityrightsla.org/" target="_blank">Visit Website</a>
 </div>
 
 </div>
-
+</div>
 </div>
 
-</div>
+<!-- =========================================
+     ADVOCACY MODAL
+========================================= -->
 
-<!-- =========================================================
-     MODAL: ADVOCACY
-========================================================= -->
-
-<div class="modal" id="advocacy" role="dialog" aria-modal="true">
+<div class="modal" id="advocacy">
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('advocacy')" aria-label="Close">
+<button class="close-button" onclick="closeModal('advocacy')">
 ×
 </button>
 
-<div class="modal-header">
-
 <h2>📣 Advocacy Resources</h2>
 
-<p>
-Learn about disability rights, autism advocacy, and self-advocacy.
+<p class="modal-description">
+Learn about autism advocacy and disability rights.
 </p>
-
-</div>
 
 <div class="resource-list">
 
 <div class="resource-card">
 <h3>Autistic Self Advocacy Network</h3>
-<p>Advocacy resources created by and for autistic people.</p>
-<a class="resource-button" href="https://autisticadvocacy.org/" target="_blank" rel="noopener">Visit ASAN</a>
+<p>Advocacy resources led by and for autistic people.</p>
+<a class="resource-button" href="https://autisticadvocacy.org/" target="_blank">Visit ASAN</a>
 </div>
 
 <div class="resource-card">
 <h3>Wrightslaw</h3>
 <p>Special education law and advocacy information.</p>
-<a class="resource-button" href="https://www.wrightslaw.com/" target="_blank" rel="noopener">Visit Wrightslaw</a>
+<a class="resource-button" href="https://www.wrightslaw.com/" target="_blank">Visit Wrightslaw</a>
 </div>
 
 <div class="resource-card">
 <h3>Disability Rights Louisiana</h3>
-<p>Disability rights and advocacy services in Louisiana.</p>
-<a class="resource-button" href="https://disabilityrightsla.org/" target="_blank" rel="noopener">Visit Website</a>
-</div>
-
-<div class="resource-card">
-<h3>Autism Society</h3>
-<p>Autism advocacy and community resources.</p>
-<a class="resource-button" href="https://autismsociety.org/" target="_blank" rel="noopener">Visit Website</a>
+<p>Disability rights advocacy in Louisiana.</p>
+<a class="resource-button" href="https://disabilityrightsla.org/" target="_blank">Visit Website</a>
 </div>
 
 </div>
-
+</div>
 </div>
 
-</div>
+<!-- =========================================
+     EMPLOYMENT MODAL
+========================================= -->
 
-<!-- =========================================================
-     MODAL: EMPLOYMENT
-========================================================= -->
-
-<div class="modal" id="employment" role="dialog" aria-modal="true">
+<div class="modal" id="employment">
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('employment')" aria-label="Close">
+<button class="close-button" onclick="closeModal('employment')">
 ×
 </button>
 
-<div class="modal-header">
-
 <h2>💼 Employment & Adult Services</h2>
 
-<p>
-Resources for employment, job training, and independent living.
+<p class="modal-description">
+Employment and independent living resources.
 </p>
-
-</div>
 
 <div class="resource-list">
 
 <div class="resource-card">
 <h3>Louisiana Workforce Commission</h3>
-<p>Employment and workforce development services.</p>
-<a class="resource-button" href="https://www.laworks.net/" target="_blank" rel="noopener">Visit LWC</a>
-</div>
-
-<div class="resource-card">
-<h3>Vocational Rehabilitation</h3>
-<p>Explore employment support and vocational rehabilitation services.</p>
-<a class="resource-button" href="https://www.laworks.net/" target="_blank" rel="noopener">Visit Resource</a>
+<p>Employment and workforce resources.</p>
+<a class="resource-button" href="https://www.laworks.net/" target="_blank">Visit LWC</a>
 </div>
 
 <div class="resource-card">
 <h3>Autistic Self Advocacy Network</h3>
 <p>Resources for autistic adults and self-advocacy.</p>
-<a class="resource-button" href="https://autisticadvocacy.org/" target="_blank" rel="noopener">Visit ASAN</a>
+<a class="resource-button" href="https://autisticadvocacy.org/" target="_blank">Visit ASAN</a>
 </div>
 
 <div class="resource-card">
 <h3>Autism Society</h3>
-<p>Explore autism resources for adults and families.</p>
-<a class="resource-button" href="https://autismsociety.org/" target="_blank" rel="noopener">Visit Website</a>
+<p>Resources for autistic adults and families.</p>
+<a class="resource-button" href="https://autismsociety.org/" target="_blank">Visit Website</a>
 </div>
 
 </div>
-
+</div>
 </div>
 
-</div>
+<!-- =========================================
+     COMMUNITY MODAL
+========================================= -->
 
-<!-- =========================================================
-     MODAL: COMMUNITY
-========================================================= -->
-
-<div class="modal" id="community" role="dialog" aria-modal="true">
+<div class="modal" id="community">
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('community')" aria-label="Close">
+<button class="close-button" onclick="closeModal('community')">
 ×
 </button>
 
-<div class="modal-header">
-
 <h2>🤝 Community Resources</h2>
 
-<p>
+<p class="modal-description">
 Find assistance with everyday needs and community support.
 </p>
-
-</div>
 
 <div class="resource-list">
 
 <div class="resource-card">
 <h3>Louisiana 211</h3>
-<p>Find local resources for food, housing, healthcare, transportation, and more.</p>
-<a class="resource-button" href="https://www.louisiana211.org/" target="_blank" rel="noopener">Visit 211</a>
+<p>Find local resources for food, housing, healthcare, and transportation.</p>
+<a class="resource-button" href="https://www.louisiana211.org/" target="_blank">Visit 211</a>
 </div>
 
 <div class="resource-card">
 <h3>FindHelp</h3>
 <p>Search for local assistance programs by ZIP code.</p>
-<a class="resource-button" href="https://www.findhelp.org/" target="_blank" rel="noopener">Visit FindHelp</a>
+<a class="resource-button" href="https://www.findhelp.org/" target="_blank">Visit FindHelp</a>
 </div>
 
 <div class="resource-card">
 <h3>Benefits.gov</h3>
-<p>Explore government benefit programs and assistance.</p>
-<a class="resource-button" href="https://www.benefits.gov/" target="_blank" rel="noopener">Visit Benefits.gov</a>
+<p>Explore government benefit programs.</p>
+<a class="resource-button" href="https://www.benefits.gov/" target="_blank">Visit Benefits.gov</a>
 </div>
 
 <div class="resource-card">
 <h3>Feeding America</h3>
-<p>Find food banks and food assistance near you.</p>
-<a class="resource-button" href="https://www.feedingamerica.org/find-your-local-foodbank" target="_blank" rel="noopener">Find Food Assistance</a>
-</div>
-
-<div class="resource-card">
-<h3>211 United Way</h3>
-<p>Connect with local community support services.</p>
-<a class="resource-button" href="https://www.211.org/" target="_blank" rel="noopener">Visit 211</a>
+<p>Find food banks and food assistance.</p>
+<a class="resource-button" href="https://www.feedingamerica.org/find-your-local-foodbank" target="_blank">Find Food Assistance</a>
 </div>
 
 </div>
-
+</div>
 </div>
 
-</div>
-
-<!-- ==============================
+<!-- =========================================
      FOOTER
-============================== -->
+========================================= -->
 
 <footer>
 
@@ -1576,30 +1424,27 @@ Connecting families. Sharing resources. Building support. 💙
 </p>
 
 <p>
-This website provides information for educational purposes.
-Always verify services and eligibility directly with each organization.
+Always verify current services, eligibility, and availability
+directly with each organization.
 </p>
 
-<a class="back-top" href="#top">
+<a href="#top" class="back-top">
 ⬆ Back to Top
 </a>
 
 </footer>
 
-<!-- ==============================
+<!-- =========================================
      JAVASCRIPT
-============================== -->
+========================================= -->
 
 <script>
 
+/* OPEN PUZZLE POPUP */
 
-/* ==============================
-   OPEN MODAL
-============================== */
+function openModal(id) {
 
-function openModal(modalId) {
-
-    const modal = document.getElementById(modalId);
+    const modal = document.getElementById(id);
 
     if (modal) {
 
@@ -1607,20 +1452,16 @@ function openModal(modalId) {
 
         document.body.style.overflow = "hidden";
 
-        modal.querySelector(".close-button").focus();
-
     }
 
 }
 
 
-/* ==============================
-   CLOSE MODAL
-============================== */
+/* CLOSE PUZZLE POPUP */
 
-function closeModal(modalId) {
+function closeModal(id) {
 
-    const modal = document.getElementById(modalId);
+    const modal = document.getElementById(id);
 
     if (modal) {
 
@@ -1633,9 +1474,7 @@ function closeModal(modalId) {
 }
 
 
-/* ==============================
-   CLOSE WHEN CLICKING OUTSIDE
-============================== */
+/* CLICK OUTSIDE POPUP TO CLOSE */
 
 document.querySelectorAll(".modal").forEach(function(modal) {
 
@@ -1654,9 +1493,7 @@ document.querySelectorAll(".modal").forEach(function(modal) {
 });
 
 
-/* ==============================
-   ESC KEY CLOSES MODAL
-============================== */
+/* PRESS ESC TO CLOSE */
 
 document.addEventListener("keydown", function(event) {
 
@@ -1675,31 +1512,38 @@ document.addEventListener("keydown", function(event) {
 });
 
 
-/* ==============================
-   SEARCH RESOURCE MAP
-============================== */
+/* SEARCH PUZZLE CATEGORIES */
 
-function searchResources() {
+function searchPuzzles() {
 
-    const input = document
+    const searchText =
+        document
         .getElementById("resourceSearch")
         .value
         .toLowerCase()
         .trim();
 
-    const puzzlePieces = document.querySelectorAll(".puzzle-piece");
+    const puzzles =
+        document.querySelectorAll(".puzzle-piece");
 
-    puzzlePieces.forEach(function(piece) {
 
-        const text = piece.innerText.toLowerCase();
+    puzzles.forEach(function(puzzle) {
 
-        if (text.includes(input)) {
+        const searchableText =
+            puzzle.getAttribute("data-search");
 
-            piece.style.display = "";
+
+        if (
+            searchableText.includes(searchText)
+            ||
+            searchText === ""
+        ) {
+
+            puzzle.style.display = "";
 
         } else {
 
-            piece.style.display = "none";
+            puzzle.style.display = "none";
 
         }
 
@@ -1707,25 +1551,8 @@ function searchResources() {
 
 }
 
-
-/* ==============================
-   CLOSE MODAL AFTER EXTERNAL LINK
-   OPENS IN NEW TAB
-============================== */
-
-document.querySelectorAll(".resource-button").forEach(function(link) {
-
-    link.addEventListener("click", function() {
-
-        // The resource opens in a new browser tab.
-        // The current Joycelyn Autism Resource Hub
-        // remains open for the visitor.
-
-    });
-
-});
-
 </script>
 
 </body>
 </html>
+
