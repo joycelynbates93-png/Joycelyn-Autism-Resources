@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -129,11 +128,11 @@ nav a:hover {
 
 
 /* =========================================
-   RESOURCE MAP SECTION
+   RESOURCE MAP
 ========================================= */
 
 .resource-map {
-    max-width: 1200px;
+    max-width: 1250px;
     margin: auto;
     padding: 65px 20px;
 }
@@ -148,168 +147,154 @@ nav a:hover {
 .resource-intro {
     text-align: center;
     max-width: 750px;
-    margin: 0 auto 50px;
+    margin: 0 auto 40px;
 }
 
 
 /* =========================================
-   ACTUAL PUZZLE PIECES
+   SVG PUZZLE BOARD
 ========================================= */
 
 .puzzle-board {
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-    max-width: 1100px;
-    margin: auto;
+    gap: 0;
     padding: 20px;
 }
 
-
-/*
-   Each puzzle piece is a real puzzle-shaped
-   CSS button using rounded tabs and notches.
-*/
-
 .puzzle-piece {
     position: relative;
-    min-height: 190px;
+    min-width: 0;
+    min-height: 210px;
     border: none;
+    background: transparent;
+    padding: 0;
     cursor: pointer;
-    color: white;
-    padding: 35px 25px;
-    text-align: center;
-    font-weight: bold;
-    isolation: isolate;
-
-    /* Puzzle-piece shape */
-    border-radius: 18px 18px 35px 18px;
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-
-    box-shadow:
-        0 8px 15px rgba(0,0,0,0.15);
+    transition: transform 0.25s ease, filter 0.25s ease;
+    z-index: 1;
 }
-
-
-/* Puzzle tab on top */
-
-.puzzle-piece::before {
-    content: "";
-    position: absolute;
-    width: 55px;
-    height: 55px;
-    background: inherit;
-    border-radius: 50%;
-    top: -27px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: -1;
-}
-
-
-/* Puzzle tab on right */
-
-.puzzle-piece::after {
-    content: "";
-    position: absolute;
-    width: 55px;
-    height: 55px;
-    background: inherit;
-    border-radius: 50%;
-    right: -27px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: -1;
-}
-
-
-/* Hover */
 
 .puzzle-piece:hover {
-    transform: translateY(-8px) scale(1.04);
-    box-shadow:
-        0 15px 30px rgba(0,0,0,0.22);
+    transform: scale(1.04);
+    filter: brightness(1.08);
     z-index: 10;
 }
 
-
-/* Keyboard focus */
-
 .puzzle-piece:focus {
-    outline: 5px solid rgba(76,69,184,0.35);
+    outline: none;
+    z-index: 20;
+}
+
+.puzzle-piece:focus-visible {
+    outline: 5px solid rgba(76,69,184,0.45);
     outline-offset: 4px;
+    border-radius: 20px;
 }
 
-
-/* Puzzle colors */
-
-.puzzle-purple {
-    background: #6c63ff;
+.puzzle-svg {
+    width: 100%;
+    height: 100%;
+    min-height: 210px;
+    display: block;
+    overflow: visible;
+    filter: drop-shadow(0 7px 8px rgba(0,0,0,0.16));
 }
 
-.puzzle-blue {
-    background: #4a90e2;
+.puzzle-shape {
+    stroke: rgba(255,255,255,0.75);
+    stroke-width: 3;
+    stroke-linejoin: round;
+    transition: stroke-width 0.25s ease;
 }
 
-.puzzle-teal {
-    background: #27ae9a;
+.puzzle-piece:hover .puzzle-shape {
+    stroke-width: 4;
 }
 
-.puzzle-pink {
-    background: #e76f9f;
+.puzzle-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 72%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    pointer-events: none;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
-
-.puzzle-orange {
-    background: #f28c28;
-}
-
-.puzzle-green {
-    background: #55a630;
-}
-
-.puzzle-coral {
-    background: #e76f51;
-}
-
-.puzzle-indigo {
-    background: #5b5fdb;
-}
-
-.puzzle-gold {
-    background: #c99a00;
-}
-
-.puzzle-sky {
-    background: #3a9bdc;
-}
-
-.puzzle-rose {
-    background: #c85583;
-}
-
-.puzzle-lavender {
-    background: #8067c7;
-}
-
-
-/* Puzzle content */
 
 .puzzle-icon {
-    font-size: 3rem;
     display: block;
+    font-size: 2.7rem;
+    line-height: 1;
     margin-bottom: 10px;
 }
 
-.puzzle-piece h3 {
-    font-size: 1.15rem;
-    margin-bottom: 8px;
+.puzzle-content h3 {
+    font-size: 1.08rem;
+    line-height: 1.25;
+    margin-bottom: 7px;
 }
 
-.puzzle-piece p {
-    font-size: 0.9rem;
+.puzzle-content p {
+    font-size: 0.84rem;
+    line-height: 1.35;
+}
+
+
+/* =========================================
+   PUZZLE COLORS
+========================================= */
+
+.puzzle-purple .puzzle-shape {
+    fill: #6c63ff;
+}
+
+.puzzle-blue .puzzle-shape {
+    fill: #4a90e2;
+}
+
+.puzzle-teal .puzzle-shape {
+    fill: #27ae9a;
+}
+
+.puzzle-pink .puzzle-shape {
+    fill: #e76f9f;
+}
+
+.puzzle-orange .puzzle-shape {
+    fill: #f28c28;
+}
+
+.puzzle-green .puzzle-shape {
+    fill: #55a630;
+}
+
+.puzzle-coral .puzzle-shape {
+    fill: #e76f51;
+}
+
+.puzzle-indigo .puzzle-shape {
+    fill: #5b5fdb;
+}
+
+.puzzle-gold .puzzle-shape {
+    fill: #c99a00;
+}
+
+.puzzle-sky .puzzle-shape {
+    fill: #3a9bdc;
+}
+
+.puzzle-rose .puzzle-shape {
+    fill: #c85583;
+}
+
+.puzzle-lavender .puzzle-shape {
+    fill: #8067c7;
 }
 
 
@@ -346,7 +331,6 @@ nav a:hover {
 }
 
 @keyframes popup {
-
     from {
         opacity: 0;
         transform: scale(0.9);
@@ -356,7 +340,6 @@ nav a:hover {
         opacity: 1;
         transform: scale(1);
     }
-
 }
 
 .close-button {
@@ -389,7 +372,7 @@ nav a:hover {
 
 
 /* =========================================
-   RESOURCE CARDS INSIDE POPUPS
+   RESOURCE CARDS
 ========================================= */
 
 .resource-list {
@@ -471,16 +454,27 @@ footer {
 
 
 /* =========================================
-   MOBILE
+   TABLET
 ========================================= */
 
 @media (max-width: 900px) {
 
     .puzzle-board {
         grid-template-columns: repeat(2, 1fr);
+        padding: 10px;
+    }
+
+    .puzzle-piece,
+    .puzzle-svg {
+        min-height: 220px;
     }
 
 }
+
+
+/* =========================================
+   MOBILE
+========================================= */
 
 @media (max-width: 600px) {
 
@@ -500,11 +494,20 @@ footer {
 
     .puzzle-board {
         grid-template-columns: 1fr;
-        gap: 25px;
+        padding: 5px;
     }
 
-    .puzzle-piece {
-        min-height: 180px;
+    .puzzle-piece,
+    .puzzle-svg {
+        min-height: 230px;
+    }
+
+    .puzzle-content {
+        width: 65%;
+    }
+
+    .puzzle-icon {
+        font-size: 2.5rem;
     }
 
     .modal-content {
@@ -513,11 +516,33 @@ footer {
 
 }
 
-</style>
 
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+}
+
+</style>
 </head>
 
+
 <body id="top">
+
 
 <!-- =========================================
      HEADER
@@ -540,6 +565,7 @@ Connecting families with trusted autism resources and support.
 </nav>
 
 </header>
+
 
 <!-- =========================================
      HERO
@@ -567,12 +593,12 @@ id="resourceSearch"
 placeholder="🔎 Search the puzzle pieces..."
 aria-label="Search resource categories"
 onkeyup="searchPuzzles()"
-
 >
 
 </div>
 
 </section>
+
 
 <!-- =========================================
      PUZZLE RESOURCE MAP
@@ -588,16 +614,46 @@ Click a piece to open a resource directory. Individual
 resources will open in a new browser tab.
 </p>
 
+
 <div class="puzzle-board">
 
-<!-- 1 -->
+
+<!-- =========================================
+     1. EARLY INTERVENTION
+========================================= -->
 
 <button
 class="puzzle-piece puzzle-purple"
 data-search="early intervention baby children developmental"
 onclick="openModal('earlyIntervention')"
-
+aria-label="Open Early Intervention resources"
 >
+
+<svg class="puzzle-svg" viewBox="0 0 250 230" aria-hidden="true">
+
+<path
+class="puzzle-shape"
+d="
+M 0 0
+H 78
+C 78 18 90 28 105 28
+C 120 28 132 18 132 0
+H 250
+V 72
+C 230 72 220 84 220 99
+C 220 114 230 126 250 126
+V 230
+H 175
+C 175 210 163 200 148 200
+C 133 200 121 210 121 230
+H 0
+Z
+"
+/>
+
+</svg>
+
+<div class="puzzle-content">
 
 <span class="puzzle-icon">👶</span>
 
@@ -607,16 +663,50 @@ onclick="openModal('earlyIntervention')"
 Early developmental support and services.
 </p>
 
+</div>
+
 </button>
 
-<!-- 2 -->
+
+<!-- =========================================
+     2. HEALTHCARE
+========================================= -->
 
 <button
 class="puzzle-piece puzzle-blue"
 data-search="healthcare insurance medicaid doctors medical"
 onclick="openModal('healthcare')"
-
+aria-label="Open Healthcare and Insurance resources"
 >
+
+<svg class="puzzle-svg" viewBox="0 0 250 230" aria-hidden="true">
+
+<path
+class="puzzle-shape"
+d="
+M 0 0
+H 70
+C 70 20 82 30 97 30
+C 112 30 124 20 124 0
+H 250
+V 75
+C 230 75 220 87 220 102
+C 220 117 230 129 250 129
+V 230
+H 170
+C 170 210 158 200 143 200
+C 128 200 116 210 116 230
+H 0
+V 155
+C 20 155 30 143 30 128
+C 30 113 20 101 0 101
+Z
+"
+/>
+
+</svg>
+
+<div class="puzzle-content">
 
 <span class="puzzle-icon">🏥</span>
 
@@ -626,16 +716,50 @@ onclick="openModal('healthcare')"
 Healthcare coverage and insurance resources.
 </p>
 
+</div>
+
 </button>
 
-<!-- 3 -->
+
+<!-- =========================================
+     3. EDUCATION
+========================================= -->
 
 <button
 class="puzzle-piece puzzle-teal"
 data-search="education school iep special education"
 onclick="openModal('education')"
-
+aria-label="Open Education and IEP resources"
 >
+
+<svg class="puzzle-svg" viewBox="0 0 250 230" aria-hidden="true">
+
+<path
+class="puzzle-shape"
+d="
+M 0 0
+H 75
+C 75 20 87 30 102 30
+C 117 30 129 20 129 0
+H 250
+V 70
+C 230 70 220 82 220 97
+C 220 112 230 124 250 124
+V 230
+H 175
+C 175 210 163 200 148 200
+C 133 200 121 210 121 230
+H 0
+V 160
+C 20 160 30 148 30 133
+C 30 118 20 106 0 106
+Z
+"
+/>
+
+</svg>
+
+<div class="puzzle-content">
 
 <span class="puzzle-icon">🎓</span>
 
@@ -645,16 +769,50 @@ onclick="openModal('education')"
 School support and special education resources.
 </p>
 
+</div>
+
 </button>
 
-<!-- 4 -->
+
+<!-- =========================================
+     4. THERAPY
+========================================= -->
 
 <button
 class="puzzle-piece puzzle-pink"
 data-search="therapy aba speech occupational services"
 onclick="openModal('therapy')"
-
+aria-label="Open Therapy and Services resources"
 >
+
+<svg class="puzzle-svg" viewBox="0 0 250 230" aria-hidden="true">
+
+<path
+class="puzzle-shape"
+d="
+M 0 0
+H 75
+C 75 20 87 30 102 30
+C 117 30 129 20 129 0
+H 250
+V 70
+C 230 70 220 82 220 97
+C 220 112 230 124 250 124
+V 230
+H 175
+C 175 210 163 200 148 200
+C 133 200 121 210 121 230
+H 0
+V 160
+C 20 160 30 148 30 133
+C 30 118 20 106 0 106
+Z
+"
+/>
+
+</svg>
+
+<div class="puzzle-content">
 
 <span class="puzzle-icon">🧠</span>
 
@@ -664,16 +822,50 @@ onclick="openModal('therapy')"
 Therapy and developmental services.
 </p>
 
+</div>
+
 </button>
 
-<!-- 5 -->
+
+<!-- =========================================
+     5. FINANCIAL
+========================================= -->
 
 <button
 class="puzzle-piece puzzle-orange"
 data-search="financial money assistance ssi benefits"
 onclick="openModal('financial')"
-
+aria-label="Open Financial Assistance resources"
 >
+
+<svg class="puzzle-svg" viewBox="0 0 250 230" aria-hidden="true">
+
+<path
+class="puzzle-shape"
+d="
+M 0 0
+H 75
+C 75 20 87 30 102 30
+C 117 30 129 20 129 0
+H 250
+V 70
+C 230 70 220 82 220 97
+C 220 112 230 124 250 124
+V 230
+H 175
+C 175 210 163 200 148 200
+C 133 200 121 210 121 230
+H 0
+V 160
+C 20 160 30 148 30 133
+C 30 118 20 106 0 106
+Z
+"
+/>
+
+</svg>
+
+<div class="puzzle-content">
 
 <span class="puzzle-icon">💰</span>
 
@@ -683,16 +875,50 @@ onclick="openModal('financial')"
 Benefits, SSI, Medicaid, and financial support.
 </p>
 
+</div>
+
 </button>
 
-<!-- 6 -->
+
+<!-- =========================================
+     6. FAMILY SUPPORT
+========================================= -->
 
 <button
 class="puzzle-piece puzzle-green"
 data-search="family support groups parents community"
 onclick="openModal('support')"
-
+aria-label="Open Family and Support resources"
 >
+
+<svg class="puzzle-svg" viewBox="0 0 250 230" aria-hidden="true">
+
+<path
+class="puzzle-shape"
+d="
+M 0 0
+H 75
+C 75 20 87 30 102 30
+C 117 30 129 20 129 0
+H 250
+V 70
+C 230 70 220 82 220 97
+C 220 112 230 124 250 124
+V 230
+H 175
+C 175 210 163 200 148 200
+C 133 200 121 210 121 230
+H 0
+V 160
+C 20 160 30 148 30 133
+C 30 118 20 106 0 106
+Z
+"
+/>
+
+</svg>
+
+<div class="puzzle-content">
 
 <span class="puzzle-icon">💙</span>
 
@@ -702,16 +928,50 @@ onclick="openModal('support')"
 Parent support and autism communities.
 </p>
 
+</div>
+
 </button>
 
-<!-- 7 -->
+
+<!-- =========================================
+     7. SAFETY
+========================================= -->
 
 <button
 class="puzzle-piece puzzle-coral"
 data-search="safety wandering emergency"
 onclick="openModal('safety')"
-
+aria-label="Open Safety Resources"
 >
+
+<svg class="puzzle-svg" viewBox="0 0 250 230" aria-hidden="true">
+
+<path
+class="puzzle-shape"
+d="
+M 0 0
+H 75
+C 75 20 87 30 102 30
+C 117 30 129 20 129 0
+H 250
+V 70
+C 230 70 220 82 220 97
+C 220 112 230 124 250 124
+V 230
+H 175
+C 175 210 163 200 148 200
+C 133 200 121 210 121 230
+H 0
+V 160
+C 20 160 30 148 30 133
+C 30 118 20 106 0 106
+Z
+"
+/>
+
+</svg>
+
+<div class="puzzle-content">
 
 <span class="puzzle-icon">🛡️</span>
 
@@ -721,16 +981,50 @@ onclick="openModal('safety')"
 Safety planning and emergency resources.
 </p>
 
+</div>
+
 </button>
 
-<!-- 8 -->
+
+<!-- =========================================
+     8. ACTIVITIES
+========================================= -->
 
 <button
 class="puzzle-piece puzzle-indigo"
 data-search="activities recreation sensory events"
 onclick="openModal('activities')"
-
+aria-label="Open Activities and Recreation resources"
 >
+
+<svg class="puzzle-svg" viewBox="0 0 250 230" aria-hidden="true">
+
+<path
+class="puzzle-shape"
+d="
+M 0 0
+H 75
+C 75 20 87 30 102 30
+C 117 30 129 20 129 0
+H 250
+V 70
+C 230 70 220 82 220 97
+C 220 112 230 124 250 124
+V 230
+H 175
+C 175 210 163 200 148 200
+C 133 200 121 210 121 230
+H 0
+V 160
+C 20 160 30 148 30 133
+C 30 118 20 106 0 106
+Z
+"
+/>
+
+</svg>
+
+<div class="puzzle-content">
 
 <span class="puzzle-icon">🎨</span>
 
@@ -740,16 +1034,50 @@ onclick="openModal('activities')"
 Sensory-friendly activities and recreation.
 </p>
 
+</div>
+
 </button>
 
-<!-- 9 -->
+
+<!-- =========================================
+     9. LOUISIANA
+========================================= -->
 
 <button
 class="puzzle-piece puzzle-gold"
 data-search="louisiana louisiana resources state"
 onclick="openModal('louisiana')"
-
+aria-label="Open Louisiana Resources"
 >
+
+<svg class="puzzle-svg" viewBox="0 0 250 230" aria-hidden="true">
+
+<path
+class="puzzle-shape"
+d="
+M 0 0
+H 75
+C 75 20 87 30 102 30
+C 117 30 129 20 129 0
+H 250
+V 70
+C 230 70 220 82 220 97
+C 220 112 230 124 250 124
+V 230
+H 175
+C 175 210 163 200 148 200
+C 133 200 121 210 121 230
+H 0
+V 160
+C 20 160 30 148 30 133
+C 30 118 20 106 0 106
+Z
+"
+/>
+
+</svg>
+
+<div class="puzzle-content">
 
 <span class="puzzle-icon">📍</span>
 
@@ -759,16 +1087,50 @@ onclick="openModal('louisiana')"
 Resources specifically for Louisiana families.
 </p>
 
+</div>
+
 </button>
 
-<!-- 10 -->
+
+<!-- =========================================
+     10. ADVOCACY
+========================================= -->
 
 <button
 class="puzzle-piece puzzle-sky"
 data-search="advocacy disability rights"
 onclick="openModal('advocacy')"
-
+aria-label="Open Advocacy resources"
 >
+
+<svg class="puzzle-svg" viewBox="0 0 250 230" aria-hidden="true">
+
+<path
+class="puzzle-shape"
+d="
+M 0 0
+H 75
+C 75 20 87 30 102 30
+C 117 30 129 20 129 0
+H 250
+V 70
+C 230 70 220 82 220 97
+C 220 112 230 124 250 124
+V 230
+H 175
+C 175 210 163 200 148 200
+C 133 200 121 210 121 230
+H 0
+V 160
+C 20 160 30 148 30 133
+C 30 118 20 106 0 106
+Z
+"
+/>
+
+</svg>
+
+<div class="puzzle-content">
 
 <span class="puzzle-icon">📣</span>
 
@@ -778,16 +1140,50 @@ onclick="openModal('advocacy')"
 Disability rights and advocacy information.
 </p>
 
+</div>
+
 </button>
 
-<!-- 11 -->
+
+<!-- =========================================
+     11. EMPLOYMENT
+========================================= -->
 
 <button
 class="puzzle-piece puzzle-rose"
 data-search="employment jobs adults work vocational"
 onclick="openModal('employment')"
-
+aria-label="Open Employment and Adult Services resources"
 >
+
+<svg class="puzzle-svg" viewBox="0 0 250 230" aria-hidden="true">
+
+<path
+class="puzzle-shape"
+d="
+M 0 0
+H 75
+C 75 20 87 30 102 30
+C 117 30 129 20 129 0
+H 250
+V 70
+C 230 70 220 82 220 97
+C 220 112 230 124 250 124
+V 230
+H 175
+C 175 210 163 200 148 200
+C 133 200 121 210 121 230
+H 0
+V 160
+C 20 160 30 148 30 133
+C 30 118 20 106 0 106
+Z
+"
+/>
+
+</svg>
+
+<div class="puzzle-content">
 
 <span class="puzzle-icon">💼</span>
 
@@ -797,16 +1193,50 @@ onclick="openModal('employment')"
 Employment and independent living resources.
 </p>
 
+</div>
+
 </button>
 
-<!-- 12 -->
+
+<!-- =========================================
+     12. COMMUNITY
+========================================= -->
 
 <button
 class="puzzle-piece puzzle-lavender"
 data-search="community food housing transportation help"
 onclick="openModal('community')"
-
+aria-label="Open Community Resources"
 >
+
+<svg class="puzzle-svg" viewBox="0 0 250 230" aria-hidden="true">
+
+<path
+class="puzzle-shape"
+d="
+M 0 0
+H 75
+C 75 20 87 30 102 30
+C 117 30 129 20 129 0
+H 250
+V 70
+C 230 70 220 82 220 97
+C 220 112 230 124 250 124
+V 230
+H 175
+C 175 210 163 200 148 200
+C 133 200 121 210 121 230
+H 0
+V 160
+C 20 160 30 148 30 133
+C 30 118 20 106 0 106
+Z
+"
+/>
+
+</svg>
+
+<div class="puzzle-content">
 
 <span class="puzzle-icon">🤝</span>
 
@@ -816,11 +1246,14 @@ onclick="openModal('community')"
 Food, housing, transportation, and assistance.
 </p>
 
+</div>
+
 </button>
 
 </div>
 
 </section>
+
 
 <!-- =========================================
      ABOUT
@@ -845,6 +1278,7 @@ support services, education, healthcare, and community resources.
 
 </section>
 
+
 <!-- =========================================
      EARLY INTERVENTION MODAL
 ========================================= -->
@@ -853,7 +1287,7 @@ support services, education, healthcare, and community resources.
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('earlyIntervention')">
+<button class="close-button" onclick="closeModal('earlyIntervention')" aria-label="Close">
 ×
 </button>
 
@@ -868,30 +1302,31 @@ Resources for young children and families seeking developmental support.
 <div class="resource-card">
 <h3>Louisiana EarlySteps</h3>
 <p>Louisiana's early intervention program for eligible infants and toddlers.</p>
-<a class="resource-button" href="https://ldh.la.gov/page/earlysteps" target="_blank">Visit EarlySteps</a>
+<a class="resource-button" href="https://ldh.la.gov/page/earlysteps" target="_blank" rel="noopener noreferrer">Visit EarlySteps</a>
 </div>
 
 <div class="resource-card">
 <h3>CDC Act Early</h3>
 <p>Learn about developmental milestones and early concerns.</p>
-<a class="resource-button" href="https://www.cdc.gov/ncbddd/actearly/" target="_blank">Visit CDC</a>
+<a class="resource-button" href="https://www.cdc.gov/ncbddd/actearly/" target="_blank" rel="noopener noreferrer">Visit CDC</a>
 </div>
 
 <div class="resource-card">
 <h3>Help Me Grow</h3>
 <p>Find developmental information and community resources.</p>
-<a class="resource-button" href="https://helpmegrownational.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://helpmegrownational.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>Autism Speaks</h3>
 <p>Autism information and resources for families.</p>
-<a class="resource-button" href="https://www.autismspeaks.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://www.autismspeaks.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 </div>
 </div>
 </div>
+
 
 <!-- =========================================
      HEALTHCARE MODAL
@@ -901,7 +1336,7 @@ Resources for young children and families seeking developmental support.
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('healthcare')">
+<button class="close-button" onclick="closeModal('healthcare')" aria-label="Close">
 ×
 </button>
 
@@ -916,30 +1351,31 @@ Healthcare and insurance resources for autism and developmental services.
 <div class="resource-card">
 <h3>Louisiana Medicaid</h3>
 <p>Learn about Medicaid coverage and healthcare programs.</p>
-<a class="resource-button" href="https://ldh.la.gov/medicaid" target="_blank">Visit Medicaid</a>
+<a class="resource-button" href="https://ldh.la.gov/medicaid" target="_blank" rel="noopener noreferrer">Visit Medicaid</a>
 </div>
 
 <div class="resource-card">
 <h3>Healthy Louisiana</h3>
 <p>Information about Louisiana Medicaid health plans.</p>
-<a class="resource-button" href="https://www.healthy.la.gov/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://www.healthy.la.gov/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>CDC Autism</h3>
 <p>Trusted information about autism and developmental health.</p>
-<a class="resource-button" href="https://www.cdc.gov/autism/" target="_blank">Visit CDC</a>
+<a class="resource-button" href="https://www.cdc.gov/autism/" target="_blank" rel="noopener noreferrer">Visit CDC</a>
 </div>
 
 <div class="resource-card">
 <h3>Autism Society</h3>
 <p>Information and connections for autistic individuals and families.</p>
-<a class="resource-button" href="https://autismsociety.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://autismsociety.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 </div>
 </div>
 </div>
+
 
 <!-- =========================================
      EDUCATION MODAL
@@ -949,7 +1385,7 @@ Healthcare and insurance resources for autism and developmental services.
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('education')">
+<button class="close-button" onclick="closeModal('education')" aria-label="Close">
 ×
 </button>
 
@@ -964,30 +1400,31 @@ Resources for school, IEPs, special education, and educational advocacy.
 <div class="resource-card">
 <h3>Louisiana Department of Education</h3>
 <p>Louisiana education and special education information.</p>
-<a class="resource-button" href="https://doe.louisiana.gov/" target="_blank">Visit LDOE</a>
+<a class="resource-button" href="https://doe.louisiana.gov/" target="_blank" rel="noopener noreferrer">Visit LDOE</a>
 </div>
 
 <div class="resource-card">
 <h3>Louisiana Believes</h3>
 <p>Information about Louisiana schools and education.</p>
-<a class="resource-button" href="https://www.louisianabelieves.com/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://www.louisianabelieves.com/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>Wrightslaw</h3>
 <p>Special education law and advocacy information.</p>
-<a class="resource-button" href="https://www.wrightslaw.com/" target="_blank">Visit Wrightslaw</a>
+<a class="resource-button" href="https://www.wrightslaw.com/" target="_blank" rel="noopener noreferrer">Visit Wrightslaw</a>
 </div>
 
 <div class="resource-card">
 <h3>Parent Center Hub</h3>
 <p>Parent training and special education resources.</p>
-<a class="resource-button" href="https://www.parentcenterhub.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://www.parentcenterhub.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 </div>
 </div>
 </div>
+
 
 <!-- =========================================
      THERAPY MODAL
@@ -997,7 +1434,7 @@ Resources for school, IEPs, special education, and educational advocacy.
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('therapy')">
+<button class="close-button" onclick="closeModal('therapy')" aria-label="Close">
 ×
 </button>
 
@@ -1012,30 +1449,31 @@ Explore information about therapy and developmental services.
 <div class="resource-card">
 <h3>Autism Speaks</h3>
 <p>Information about autism services and therapies.</p>
-<a class="resource-button" href="https://www.autismspeaks.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://www.autismspeaks.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>ASHA</h3>
 <p>Speech and communication resources.</p>
-<a class="resource-button" href="https://www.asha.org/" target="_blank">Visit ASHA</a>
+<a class="resource-button" href="https://www.asha.org/" target="_blank" rel="noopener noreferrer">Visit ASHA</a>
 </div>
 
 <div class="resource-card">
 <h3>AOTA</h3>
 <p>Occupational therapy information and resources.</p>
-<a class="resource-button" href="https://www.aota.org/" target="_blank">Visit AOTA</a>
+<a class="resource-button" href="https://www.aota.org/" target="_blank" rel="noopener noreferrer">Visit AOTA</a>
 </div>
 
 <div class="resource-card">
 <h3>Autism Society</h3>
 <p>Autism service and community information.</p>
-<a class="resource-button" href="https://autismsociety.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://autismsociety.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 </div>
 </div>
 </div>
+
 
 <!-- =========================================
      FINANCIAL MODAL
@@ -1045,7 +1483,7 @@ Explore information about therapy and developmental services.
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('financial')">
+<button class="close-button" onclick="closeModal('financial')" aria-label="Close">
 ×
 </button>
 
@@ -1060,30 +1498,31 @@ Resources for SSI, disability benefits, Medicaid, and community assistance.
 <div class="resource-card">
 <h3>Social Security SSI</h3>
 <p>Learn about Supplemental Security Income.</p>
-<a class="resource-button" href="https://www.ssa.gov/ssi/" target="_blank">Visit SSA</a>
+<a class="resource-button" href="https://www.ssa.gov/ssi/" target="_blank" rel="noopener noreferrer">Visit SSA</a>
 </div>
 
 <div class="resource-card">
 <h3>Social Security Disability</h3>
 <p>Information about disability programs.</p>
-<a class="resource-button" href="https://www.ssa.gov/disability/" target="_blank">Visit SSA</a>
+<a class="resource-button" href="https://www.ssa.gov/disability/" target="_blank" rel="noopener noreferrer">Visit SSA</a>
 </div>
 
 <div class="resource-card">
 <h3>Benefits.gov</h3>
 <p>Explore government benefit programs.</p>
-<a class="resource-button" href="https://www.benefits.gov/" target="_blank">Visit Benefits.gov</a>
+<a class="resource-button" href="https://www.benefits.gov/" target="_blank" rel="noopener noreferrer">Visit Benefits.gov</a>
 </div>
 
 <div class="resource-card">
 <h3>Louisiana 211</h3>
 <p>Find local assistance programs and services.</p>
-<a class="resource-button" href="https://www.louisiana211.org/" target="_blank">Visit 211</a>
+<a class="resource-button" href="https://www.louisiana211.org/" target="_blank" rel="noopener noreferrer">Visit 211</a>
 </div>
 
 </div>
 </div>
 </div>
+
 
 <!-- =========================================
      SUPPORT MODAL
@@ -1093,7 +1532,7 @@ Resources for SSI, disability benefits, Medicaid, and community assistance.
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('support')">
+<button class="close-button" onclick="closeModal('support')" aria-label="Close">
 ×
 </button>
 
@@ -1108,30 +1547,31 @@ Connect with autism organizations and family support resources.
 <div class="resource-card">
 <h3>Autism Society</h3>
 <p>Autism support and community connections.</p>
-<a class="resource-button" href="https://autismsociety.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://autismsociety.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>Autism Speaks</h3>
 <p>Family resources and autism information.</p>
-<a class="resource-button" href="https://www.autismspeaks.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://www.autismspeaks.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>Autistic Self Advocacy Network</h3>
 <p>Advocacy resources led by and for autistic people.</p>
-<a class="resource-button" href="https://autisticadvocacy.org/" target="_blank">Visit ASAN</a>
+<a class="resource-button" href="https://autisticadvocacy.org/" target="_blank" rel="noopener noreferrer">Visit ASAN</a>
 </div>
 
 <div class="resource-card">
 <h3>National Autism Association</h3>
 <p>Safety and family resources.</p>
-<a class="resource-button" href="https://nationalautismassociation.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://nationalautismassociation.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 </div>
 </div>
 </div>
+
 
 <!-- =========================================
      SAFETY MODAL
@@ -1141,7 +1581,7 @@ Connect with autism organizations and family support resources.
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('safety')">
+<button class="close-button" onclick="closeModal('safety')" aria-label="Close">
 ×
 </button>
 
@@ -1156,24 +1596,25 @@ Resources for safety planning and emergency preparedness.
 <div class="resource-card">
 <h3>National Autism Association</h3>
 <p>Autism safety resources for families.</p>
-<a class="resource-button" href="https://nationalautismassociation.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://nationalautismassociation.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>Project Lifesaver</h3>
 <p>Resources related to locating individuals who may wander.</p>
-<a class="resource-button" href="https://projectlifesaver.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://projectlifesaver.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>911.gov</h3>
 <p>Emergency preparedness and response information.</p>
-<a class="resource-button" href="https://www.911.gov/" target="_blank">Visit 911.gov</a>
+<a class="resource-button" href="https://www.911.gov/" target="_blank" rel="noopener noreferrer">Visit 911.gov</a>
 </div>
 
 </div>
 </div>
 </div>
+
 
 <!-- =========================================
      ACTIVITIES MODAL
@@ -1183,7 +1624,7 @@ Resources for safety planning and emergency preparedness.
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('activities')">
+<button class="close-button" onclick="closeModal('activities')" aria-label="Close">
 ×
 </button>
 
@@ -1198,24 +1639,25 @@ Explore recreation and inclusive activities.
 <div class="resource-card">
 <h3>Special Olympics</h3>
 <p>Inclusive sports and athletic opportunities.</p>
-<a class="resource-button" href="https://www.specialolympics.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://www.specialolympics.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 <div class="resource-card">
 <h3>YMCA</h3>
 <p>Find local recreation and community programs.</p>
-<a class="resource-button" href="https://www.ymca.org/" target="_blank">Visit YMCA</a>
+<a class="resource-button" href="https://www.ymca.org/" target="_blank" rel="noopener noreferrer">Visit YMCA</a>
 </div>
 
 <div class="resource-card">
 <h3>Autism Society</h3>
 <p>Community and activity resources.</p>
-<a class="resource-button" href="https://autismsociety.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://autismsociety.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 </div>
 </div>
 </div>
+
 
 <!-- =========================================
      LOUISIANA MODAL
@@ -1225,7 +1667,7 @@ Explore recreation and inclusive activities.
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('louisiana')">
+<button class="close-button" onclick="closeModal('louisiana')" aria-label="Close">
 ×
 </button>
 
@@ -1240,42 +1682,43 @@ Important resources for families living in Louisiana.
 <div class="resource-card">
 <h3>Louisiana Department of Health</h3>
 <p>Healthcare and public health services.</p>
-<a class="resource-button" href="https://ldh.la.gov/" target="_blank">Visit LDH</a>
+<a class="resource-button" href="https://ldh.la.gov/" target="_blank" rel="noopener noreferrer">Visit LDH</a>
 </div>
 
 <div class="resource-card">
 <h3>Louisiana Medicaid</h3>
 <p>Medicaid healthcare programs.</p>
-<a class="resource-button" href="https://ldh.la.gov/medicaid" target="_blank">Visit Medicaid</a>
+<a class="resource-button" href="https://ldh.la.gov/medicaid" target="_blank" rel="noopener noreferrer">Visit Medicaid</a>
 </div>
 
 <div class="resource-card">
 <h3>Louisiana EarlySteps</h3>
 <p>Early intervention services for eligible young children.</p>
-<a class="resource-button" href="https://ldh.la.gov/page/earlysteps" target="_blank">Visit EarlySteps</a>
+<a class="resource-button" href="https://ldh.la.gov/page/earlysteps" target="_blank" rel="noopener noreferrer">Visit EarlySteps</a>
 </div>
 
 <div class="resource-card">
 <h3>Louisiana Department of Education</h3>
 <p>Education and special education information.</p>
-<a class="resource-button" href="https://doe.louisiana.gov/" target="_blank">Visit LDOE</a>
+<a class="resource-button" href="https://doe.louisiana.gov/" target="_blank" rel="noopener noreferrer">Visit LDOE</a>
 </div>
 
 <div class="resource-card">
 <h3>Louisiana 211</h3>
 <p>Find food, housing, transportation, healthcare, and other resources.</p>
-<a class="resource-button" href="https://www.louisiana211.org/" target="_blank">Visit 211</a>
+<a class="resource-button" href="https://www.louisiana211.org/" target="_blank" rel="noopener noreferrer">Visit 211</a>
 </div>
 
 <div class="resource-card">
 <h3>Disability Rights Louisiana</h3>
 <p>Disability rights and advocacy resources.</p>
-<a class="resource-button" href="https://disabilityrightsla.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://disabilityrightsla.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 </div>
 </div>
 </div>
+
 
 <!-- =========================================
      ADVOCACY MODAL
@@ -1285,7 +1728,7 @@ Important resources for families living in Louisiana.
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('advocacy')">
+<button class="close-button" onclick="closeModal('advocacy')" aria-label="Close">
 ×
 </button>
 
@@ -1300,24 +1743,25 @@ Learn about autism advocacy and disability rights.
 <div class="resource-card">
 <h3>Autistic Self Advocacy Network</h3>
 <p>Advocacy resources led by and for autistic people.</p>
-<a class="resource-button" href="https://autisticadvocacy.org/" target="_blank">Visit ASAN</a>
+<a class="resource-button" href="https://autisticadvocacy.org/" target="_blank" rel="noopener noreferrer">Visit ASAN</a>
 </div>
 
 <div class="resource-card">
 <h3>Wrightslaw</h3>
 <p>Special education law and advocacy information.</p>
-<a class="resource-button" href="https://www.wrightslaw.com/" target="_blank">Visit Wrightslaw</a>
+<a class="resource-button" href="https://www.wrightslaw.com/" target="_blank" rel="noopener noreferrer">Visit Wrightslaw</a>
 </div>
 
 <div class="resource-card">
 <h3>Disability Rights Louisiana</h3>
 <p>Disability rights advocacy in Louisiana.</p>
-<a class="resource-button" href="https://disabilityrightsla.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://disabilityrightsla.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 </div>
 </div>
 </div>
+
 
 <!-- =========================================
      EMPLOYMENT MODAL
@@ -1327,7 +1771,7 @@ Learn about autism advocacy and disability rights.
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('employment')">
+<button class="close-button" onclick="closeModal('employment')" aria-label="Close">
 ×
 </button>
 
@@ -1342,24 +1786,25 @@ Employment and independent living resources.
 <div class="resource-card">
 <h3>Louisiana Workforce Commission</h3>
 <p>Employment and workforce resources.</p>
-<a class="resource-button" href="https://www.laworks.net/" target="_blank">Visit LWC</a>
+<a class="resource-button" href="https://www.laworks.net/" target="_blank" rel="noopener noreferrer">Visit LWC</a>
 </div>
 
 <div class="resource-card">
 <h3>Autistic Self Advocacy Network</h3>
 <p>Resources for autistic adults and self-advocacy.</p>
-<a class="resource-button" href="https://autisticadvocacy.org/" target="_blank">Visit ASAN</a>
+<a class="resource-button" href="https://autisticadvocacy.org/" target="_blank" rel="noopener noreferrer">Visit ASAN</a>
 </div>
 
 <div class="resource-card">
 <h3>Autism Society</h3>
 <p>Resources for autistic adults and families.</p>
-<a class="resource-button" href="https://autismsociety.org/" target="_blank">Visit Website</a>
+<a class="resource-button" href="https://autismsociety.org/" target="_blank" rel="noopener noreferrer">Visit Website</a>
 </div>
 
 </div>
 </div>
 </div>
+
 
 <!-- =========================================
      COMMUNITY MODAL
@@ -1369,7 +1814,7 @@ Employment and independent living resources.
 
 <div class="modal-content">
 
-<button class="close-button" onclick="closeModal('community')">
+<button class="close-button" onclick="closeModal('community')" aria-label="Close">
 ×
 </button>
 
@@ -1384,30 +1829,31 @@ Find assistance with everyday needs and community support.
 <div class="resource-card">
 <h3>Louisiana 211</h3>
 <p>Find local resources for food, housing, healthcare, and transportation.</p>
-<a class="resource-button" href="https://www.louisiana211.org/" target="_blank">Visit 211</a>
+<a class="resource-button" href="https://www.louisiana211.org/" target="_blank" rel="noopener noreferrer">Visit 211</a>
 </div>
 
 <div class="resource-card">
 <h3>FindHelp</h3>
 <p>Search for local assistance programs by ZIP code.</p>
-<a class="resource-button" href="https://www.findhelp.org/" target="_blank">Visit FindHelp</a>
+<a class="resource-button" href="https://www.findhelp.org/" target="_blank" rel="noopener noreferrer">Visit FindHelp</a>
 </div>
 
 <div class="resource-card">
 <h3>Benefits.gov</h3>
 <p>Explore government benefit programs.</p>
-<a class="resource-button" href="https://www.benefits.gov/" target="_blank">Visit Benefits.gov</a>
+<a class="resource-button" href="https://www.benefits.gov/" target="_blank" rel="noopener noreferrer">Visit Benefits.gov</a>
 </div>
 
 <div class="resource-card">
 <h3>Feeding America</h3>
 <p>Find food banks and food assistance.</p>
-<a class="resource-button" href="https://www.feedingamerica.org/find-your-local-foodbank" target="_blank">Find Food Assistance</a>
+<a class="resource-button" href="https://www.feedingamerica.org/find-your-local-foodbank" target="_blank" rel="noopener noreferrer">Find Food Assistance</a>
 </div>
 
 </div>
 </div>
 </div>
+
 
 <!-- =========================================
      FOOTER
@@ -1434,13 +1880,16 @@ directly with each organization.
 
 </footer>
 
+
 <!-- =========================================
      JAVASCRIPT
 ========================================= -->
 
 <script>
 
-/* OPEN PUZZLE POPUP */
+/* =========================================
+   OPEN MODAL
+========================================= */
 
 function openModal(id) {
 
@@ -1452,12 +1901,21 @@ function openModal(id) {
 
         document.body.style.overflow = "hidden";
 
+        const closeButton =
+            modal.querySelector(".close-button");
+
+        if (closeButton) {
+            closeButton.focus();
+        }
+
     }
 
 }
 
 
-/* CLOSE PUZZLE POPUP */
+/* =========================================
+   CLOSE MODAL
+========================================= */
 
 function closeModal(id) {
 
@@ -1474,7 +1932,9 @@ function closeModal(id) {
 }
 
 
-/* CLICK OUTSIDE POPUP TO CLOSE */
+/* =========================================
+   CLICK OUTSIDE MODAL TO CLOSE
+========================================= */
 
 document.querySelectorAll(".modal").forEach(function(modal) {
 
@@ -1493,17 +1953,21 @@ document.querySelectorAll(".modal").forEach(function(modal) {
 });
 
 
-/* PRESS ESC TO CLOSE */
+/* =========================================
+   ESCAPE KEY CLOSES MODAL
+========================================= */
 
 document.addEventListener("keydown", function(event) {
 
     if (event.key === "Escape") {
 
-        document.querySelectorAll(".modal.active").forEach(function(modal) {
+        document
+            .querySelectorAll(".modal.active")
+            .forEach(function(modal) {
 
-            modal.classList.remove("active");
+                modal.classList.remove("active");
 
-        });
+            });
 
         document.body.style.overflow = "";
 
@@ -1512,7 +1976,9 @@ document.addEventListener("keydown", function(event) {
 });
 
 
-/* SEARCH PUZZLE CATEGORIES */
+/* =========================================
+   SEARCH PUZZLE CATEGORIES
+========================================= */
 
 function searchPuzzles() {
 
@@ -1530,7 +1996,9 @@ function searchPuzzles() {
     puzzles.forEach(function(puzzle) {
 
         const searchableText =
-            puzzle.getAttribute("data-search");
+            puzzle
+            .getAttribute("data-search")
+            .toLowerCase();
 
 
         if (
@@ -1551,8 +2019,34 @@ function searchPuzzles() {
 
 }
 
+
+/* =========================================
+   ENTER KEY SUPPORT
+========================================= */
+
+document
+    .querySelectorAll(".puzzle-piece")
+    .forEach(function(piece) {
+
+        piece.addEventListener("keydown", function(event) {
+
+            if (
+                event.key === "Enter"
+                ||
+                event.key === " "
+            ) {
+
+                event.preventDefault();
+
+                piece.click();
+
+            }
+
+        });
+
+    });
+
 </script>
 
 </body>
 </html>
-
